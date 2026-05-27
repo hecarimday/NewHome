@@ -11,9 +11,6 @@
     .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
     .page-hero h1 { font-size: 36px; font-weight: 700; }
     .page-hero h1 span { color: var(--green); }
-    .demo-nav { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
-    .demo-nav a { padding: 8px 20px; border-radius: 6px; border: 1.5px solid var(--border); font-size: 13px; font-weight: 600; color: var(--text-muted); transition: all 0.15s; }
-    .demo-nav a.active, .demo-nav a:hover { background: var(--green); color: #fff; border-color: var(--green); }
     .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .demo-card { background: var(--white); border-radius: 10px; padding: 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     .demo-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
@@ -37,14 +34,16 @@
   <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Text Mining 데모를 체험해 보세요</p>
 </div>
 
-<div class="section" style="margin-bottom:60px">
-  <div class="demo-nav">
+<div class="section" style="margin-top:24px;margin-bottom:0;padding-bottom:0">
+  <div class="sub-nav">
     <a href="demos-nlp.html">NLP</a>
     <a href="demos-ir.html">IR</a>
     <a href="demos-textmining.html" class="active">Text Mining</a>
     <a href="demos-generativeai.html">Generative AI</a>
   </div>
+</div>
 
+<div class="section" style="margin-bottom:60px">
   <div class="demo-grid">
 
     <div class="demo-card">

@@ -1,65 +1,44 @@
 /**
- * Shared navbar component.
- * Each page must set window.NAV_ROOT before loading this script:
+ * Shared navbar — 6 flat top-level items, no dropdowns.
+ * Sub-pages are navigated from within each section.
+ *
+ * Each page sets window.NAV_ROOT before loading this script:
  *   - index.html (root):  window.NAV_ROOT = '';
  *   - pages/*.html:       window.NAV_ROOT = '../';
  */
 (function () {
   const ROOT = (typeof window.NAV_ROOT !== 'undefined') ? window.NAV_ROOT : '';
-  const P = ROOT + 'pages/'; // shorthand for pages/ dir
+  const P = ROOT + 'pages/';
 
   const NAV = [
-    {
-      label: 'About Us',
-      children: [
-        { label: 'Introduction', href: P + 'introduction.html' },
-        { label: 'Photos',       href: P + 'photos.html' },
-        { label: 'Contact Us',   href: P + 'contact.html' },
-      ]
-    },
-    {
-      label: 'Research',
-      children: [
-        { label: 'Fields',   href: P + 'fields.html' },
-        { label: 'Projects', href: P + 'projects.html' },
-        { label: 'Patents',  href: P + 'patents.html' },
-      ]
-    },
+    { label: 'About Us',     href: P + 'introduction.html' },
+    { label: 'Research',     href: P + 'fields.html' },
     { label: 'Publications', href: P + 'publications.html' },
     { label: 'Members',      href: P + 'members.html' },
-    {
-      label: 'Demos',
-      children: [
-        { label: 'NLP',           href: P + 'demos-nlp.html' },
-        { label: 'IR',            href: P + 'demos-ir.html' },
-        { label: 'Text Mining',   href: P + 'demos-textmining.html' },
-        { label: 'Generative AI', href: P + 'demos-generativeai.html' },
-      ]
-    },
-    { label: 'Boards', href: P + 'boards.html' },
+    { label: 'Demos',        href: P + 'demos-nlp.html' },
+    { label: 'Boards',       href: P + 'boards.html' },
   ];
 
-  function buildItem(item) {
-    const hasChildren = item.children && item.children.length;
-    const isActive = hasChildren
-      ? item.children.some(c => location.pathname.endsWith(c.href.split('/').pop()))
-      : location.pathname.endsWith((item.href || '').split('/').pop());
+  const currentFile = location.pathname.split('/').pop() || 'index.html';
 
-    const dropdownHTML = hasChildren
-      ? `<div class="dropdown">${item.children.map(c =>
-          `<a href="${c.href}">${c.label}</a>`).join('')}</div>`
-      : '';
+  const ACTIVE_MAP = {
+    'introduction.html': 'About Us', 'photos.html': 'About Us', 'contact.html': 'About Us',
+    'fields.html': 'Research', 'projects.html': 'Research', 'patents.html': 'Research',
+    'publications.html': 'Publications',
+    'members.html': 'Members',
+    'demos-nlp.html': 'Demos', 'demos-ir.html': 'Demos',
+    'demos-textmining.html': 'Demos', 'demos-generativeai.html': 'Demos',
+    'boards.html': 'Boards',
+  };
 
-    const caretHTML = hasChildren ? `<span class="caret">▾</span>` : '';
-    const href = hasChildren ? '#' : item.href;
-    const onclick = hasChildren ? ' onclick="return false"' : '';
+  const activeLabel = ACTIVE_MAP[currentFile] || '';
 
-    return `
-      <li class="nav-item${isActive ? ' active' : ''}">
-        <a href="${href}"${onclick}>${item.label}${caretHTML}</a>
-        ${dropdownHTML}
-      </li>`;
-  }
+  const items = NAV.map(item => {
+    const isActive = item.label === activeLabel;
+    return `<li class="nav-item${isActive ? ' active' : ''}">
+      <a href="${item.href}">${item.label}</a>
+    </li>`;
+  }).join('');
 
   const logoSVG = `
     <svg class="logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,9 +54,7 @@
           ${logoSVG}
           <span class="logo-text">iis<span>Lab</span></span>
         </a>
-        <ul class="nav-menu">
-          ${NAV.map(buildItem).join('')}
-        </ul>
+        <ul class="nav-menu">${items}</ul>
         <div class="nav-actions">
           <button class="nav-icon-btn" aria-label="Search" onclick="alert('검색 기능은 준비 중입니다.')">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -88,6 +65,5 @@
       </div>
     </nav>`;
 
-  // Insert navbar as the very first element in <body>
   document.body.insertAdjacentHTML('afterbegin', html);
 })();
