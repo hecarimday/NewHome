@@ -88,6 +88,7 @@ img { max-width: 100%; display: block; }
   align-items: stretch;
   flex: 1;
   height: var(--nav-height);
+  justify-content: space-evenly;
 }
 
 .nav-item {
@@ -198,7 +199,7 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
-  margin-left: 12px;
+  margin-left: 32px;
 }
 
 .nav-icon-btn {
