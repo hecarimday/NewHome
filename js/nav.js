@@ -75,6 +75,7 @@
   const html = `
     <nav class="navbar" id="main-navbar">
       <div class="nav-inner">
+        <a class="nav-brand" href="${ROOT}index.html">NLPLAB</a>
         <ul class="nav-menu">
           ${NAV.map(buildItem).join('')}
         </ul>
