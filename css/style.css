@@ -475,13 +475,66 @@ img { max-width: 100%; display: block; }
 }
 
 /* ── Research Areas ── */
-.research-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.research-carousel {
+  position: relative;
 }
 
+.research-carousel-viewport {
+  overflow: hidden;
+}
+
+.research-carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.45s ease;
+}
+
+.research-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.research-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.research-carousel-dot.active {
+  background: var(--green);
+  transform: scale(1.25);
+}
+
+.research-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+  z-index: 10;
+}
+.research-carousel-btn:hover { background: var(--bg); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.research-carousel-btn.prev { left: -18px; }
+.research-carousel-btn.next { right: -18px; }
+
 .research-card {
+  flex: 0 0 calc((100% - 40px) / 3);
   background: var(--white);
   border-radius: 8px;
   padding: 28px 24px;
@@ -653,7 +706,9 @@ footer {
     height: 180px;
   }
   .carousel-content { padding: 28px 24px; }
-  .research-grid { grid-template-columns: 1fr; }
+  .research-card { flex: 0 0 calc(100% - 0px); }
+  .research-carousel-btn.prev { left: 0; }
+  .research-carousel-btn.next { right: 0; }
   .footer-inner { flex-direction: column; }
   .hero-title { font-size: 26px; }
 }

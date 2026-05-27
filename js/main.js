@@ -41,6 +41,51 @@
   startTimer();
 })();
 
+// ── Research Carousel ──
+(function () {
+  const track = document.querySelector('.research-carousel-track');
+  const dotsContainer = document.querySelector('.research-carousel-dots');
+  if (!track) return;
+
+  const cards = Array.from(track.querySelectorAll('.research-card'));
+  const visible = window.innerWidth <= 768 ? 1 : 3;
+  const max = cards.length - visible;
+  let current = 0;
+  let timer;
+
+  // generate dots
+  for (let i = 0; i <= max; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'research-carousel-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => { goTo(i); startTimer(); });
+    dotsContainer.appendChild(dot);
+  }
+  const dots = () => dotsContainer.querySelectorAll('.research-carousel-dot');
+
+  function cardStep() {
+    return cards[0].offsetWidth + 20;
+  }
+
+  function goTo(i) {
+    current = Math.max(0, Math.min(i, max));
+    track.style.transform = `translateX(-${current * cardStep()}px)`;
+    dots().forEach((d, j) => d.classList.toggle('active', j === current));
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current < max ? current + 1 : 0), 4000);
+  }
+
+  document.querySelector('.research-carousel-btn.next')?.addEventListener('click', () => { goTo(current + 1); startTimer(); });
+  document.querySelector('.research-carousel-btn.prev')?.addEventListener('click', () => { goTo(current - 1); startTimer(); });
+
+  window.addEventListener('resize', () => goTo(current));
+
+  goTo(0);
+  startTimer();
+})();
+
 // ── Notice Image Banner ──
 (function () {
   const slides = document.querySelectorAll('.notice-banner-slide');
