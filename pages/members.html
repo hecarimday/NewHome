@@ -12,84 +12,39 @@
     .page-hero h1 { font-size: 36px; font-weight: 700; }
     .page-hero h1 span { color: var(--green); }
     .member-group { margin-bottom: 48px; }
-    .member-group-title {
-      font-size: 14px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--text-muted);
-      margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
-    }
-    .member-grid-lg { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-    .member-card-lg {
-      background: var(--white); border-radius: 10px; overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s;
-      text-align: center;
-    }
-    .member-card-lg:hover { transform: translateY(-3px); }
-    .member-card-lg .avatar-lg {
-      height: 180px; background: linear-gradient(135deg, #d4e8d8, #b8d4be);
-      display: flex; align-items: center; justify-content: center; font-size: 64px;
-    }
-    .member-card-lg .info { padding: 18px; }
-    .member-card-lg .name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-    .member-card-lg .role { font-size: 13px; color: var(--green); font-weight: 500; margin-bottom: 6px; }
-    .member-card-lg .email { font-size: 12px; color: var(--text-muted); }
-    .pi-card {
-      display: flex; gap: 32px; align-items: center; background: var(--white);
-      border-radius: 10px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      margin-bottom: 48px;
-    }
-    .pi-avatar {
-      width: 140px; height: 140px; flex-shrink: 0; border-radius: 50%;
-      background: linear-gradient(135deg, #c4dfc9, #8fbf98);
-      display: flex; align-items: center; justify-content: center; font-size: 56px;
-    }
+    .group-label { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+    .member-card { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center; transition: transform 0.2s; }
+    .member-card:hover { transform: translateY(-3px); }
+    .member-avatar-lg { height: 160px; background: linear-gradient(135deg, #d4e8d8, #b8d4be); display: flex; align-items: center; justify-content: center; font-size: 56px; }
+    .member-info { padding: 16px; }
+    .member-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .member-role { font-size: 12px; color: var(--green); font-weight: 600; margin-bottom: 6px; }
+    .member-research { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px; }
+    .member-links { display: flex; justify-content: center; gap: 8px; }
+    .member-link { font-size: 11px; color: var(--text-muted); border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px; transition: all 0.15s; }
+    .member-link:hover { color: var(--green); border-color: var(--green); }
+    .pi-card { display: flex; gap: 28px; background: var(--white); border-radius: 10px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 40px; align-items: center; }
+    .pi-avatar { width: 130px; height: 130px; flex-shrink: 0; border-radius: 50%; background: linear-gradient(135deg, #c4dfc9, #8fbf98); display: flex; align-items: center; justify-content: center; font-size: 52px; }
     .pi-name { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
-    .pi-title { font-size: 15px; color: var(--green); font-weight: 600; margin-bottom: 12px; }
-    .pi-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; max-width: 560px; }
-    .pi-links { display: flex; gap: 10px; margin-top: 14px; }
-    .pi-link {
-      font-size: 13px; font-weight: 500; color: var(--text-muted);
-      border: 1px solid var(--border); padding: 5px 12px; border-radius: 4px;
-      transition: all 0.15s;
-    }
+    .pi-title { font-size: 14px; color: var(--green); font-weight: 600; margin-bottom: 10px; }
+    .pi-desc { font-size: 14px; color: var(--text-muted); line-height: 1.75; max-width: 540px; }
+    .pi-links { display: flex; gap: 8px; margin-top: 14px; }
+    .pi-link { font-size: 13px; font-weight: 500; color: var(--text-muted); border: 1px solid var(--border); padding: 5px 12px; border-radius: 4px; transition: all 0.15s; }
     .pi-link:hover { color: var(--green); border-color: var(--green); }
-    @media (max-width: 600px) {
-      .pi-card { flex-direction: column; text-align: center; }
-      .pi-links { justify-content: center; }
-    }
+    @media (max-width: 600px) { .pi-card { flex-direction: column; text-align: center; } .pi-links { justify-content: center; } }
   </style>
 </head>
 <body>
-
-<nav class="navbar">
-  <div class="nav-inner">
-    <a class="nav-logo" href="../index.html">
-      <svg class="logo-icon" viewBox="0 0 38 38" fill="none"><rect width="38" height="38" rx="6" fill="#e8f4ea"/><path d="M19 7L6 17v15h9v-9h8v9h9V17L19 7z" fill="#3a7d44"/><rect x="15" y="22" width="8" height="10" rx="1" fill="#2d6035"/></svg>
-      <span class="logo-text">iis<span>Lab</span></span>
-    </a>
-    <ul class="nav-menu">
-      <li><a href="research.html">Research</a></li>
-      <li><a href="members.html" class="active">Members</a></li>
-      <li><a href="publications.html">Publications</a></li>
-      <li><a href="project.html">Project</a></li>
-      <li><a href="seminar.html">Seminar</a></li>
-      <li><a href="news.html">News</a></li>
-    </ul>
-    <div class="nav-actions">
-      <a class="btn-nas" href="#">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        NAS
-      </a>
-      <a class="btn-contact" href="contact.html">Contact Us</a>
-    </div>
-  </div>
-</nav>
+<script>window.NAV_ROOT = '../';</script>
+<script src="../js/nav.js"></script>
 
 <div class="page-hero">
   <h1><span>M</span>embers</h1>
   <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">IIS Lab을 이끌어가는 연구원들을 소개합니다</p>
 </div>
 
-<div class="section">
+<div class="section" style="margin-bottom:60px">
 
   <!-- PI -->
   <div class="pi-card">
@@ -97,11 +52,7 @@
     <div>
       <div class="pi-name">교수님 성함</div>
       <div class="pi-title">Professor (Principal Investigator)</div>
-      <div class="pi-desc">
-        성균관대학교 소프트웨어융합대학 교수. 인공지능, 컴퓨터 비전, 자연어처리 분야의
-        top-tier 국제 학술대회 및 저널에 다수의 논문을 발표하였으며,
-        국내외 대형 연구과제를 수행 중입니다.
-      </div>
+      <div class="pi-desc">성균관대학교 소프트웨어융합대학 교수. 컴퓨터 비전, 자연어처리, 멀티모달 AI 분야의 top-tier 국제 학술대회 및 저널에 다수의 논문을 발표하였으며, 국내외 대형 연구과제를 수행 중입니다.</div>
       <div class="pi-links">
         <a class="pi-link" href="#">Google Scholar</a>
         <a class="pi-link" href="#">CV</a>
@@ -110,86 +61,94 @@
     </div>
   </div>
 
-  <!-- PhD Students -->
+  <!-- PhD -->
   <div class="member-group">
-    <div class="member-group-title">PhD Students</div>
-    <div class="member-grid-lg">
-      <div class="member-card-lg">
-        <div class="avatar-lg">👩‍🎓</div>
-        <div class="info">
-          <div class="name">이서연</div>
-          <div class="role">박사과정</div>
-          <div class="email">seoyeon@skku.edu</div>
+    <div class="group-label">PhD Students</div>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-avatar-lg">👩‍🎓</div>
+        <div class="member-info">
+          <div class="member-name">이서연</div>
+          <div class="member-role">박사과정</div>
+          <div class="member-research">Multimodal Learning, Vision-Language Models</div>
+          <div class="member-links"><a class="member-link" href="#">Scholar</a><a class="member-link" href="#">Email</a></div>
         </div>
       </div>
-      <div class="member-card-lg">
-        <div class="avatar-lg">👨‍🎓</div>
-        <div class="info">
-          <div class="name">김도현</div>
-          <div class="role">박사과정</div>
-          <div class="email">dohyun@skku.edu</div>
+      <div class="member-card">
+        <div class="member-avatar-lg">👨‍🎓</div>
+        <div class="member-info">
+          <div class="member-name">김도현</div>
+          <div class="member-role">박사과정</div>
+          <div class="member-research">Multimodal Contrastive Learning, NLP</div>
+          <div class="member-links"><a class="member-link" href="#">Scholar</a><a class="member-link" href="#">Email</a></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Integrated MS/PhD -->
+  <!-- Integrated -->
   <div class="member-group">
-    <div class="member-group-title">Integrated MS/PhD Students</div>
-    <div class="member-grid-lg">
-      <div class="member-card-lg">
-        <div class="avatar-lg">👩‍🎓</div>
-        <div class="info">
-          <div class="name">임지영</div>
-          <div class="role">석박통합과정</div>
-          <div class="email">jiyoung@skku.edu</div>
+    <div class="group-label">Integrated MS/PhD Students</div>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-avatar-lg">👩‍🎓</div>
+        <div class="member-info">
+          <div class="member-name">임지영</div>
+          <div class="member-role">석박통합과정</div>
+          <div class="member-research">3D Scene Understanding, Graph Learning</div>
+          <div class="member-links"><a class="member-link" href="#">Scholar</a><a class="member-link" href="#">Email</a></div>
         </div>
       </div>
-      <div class="member-card-lg">
-        <div class="avatar-lg">👨‍🎓</div>
-        <div class="info">
-          <div class="name">양희재</div>
-          <div class="role">석박통합과정</div>
-          <div class="email">heejae@skku.edu</div>
+      <div class="member-card">
+        <div class="member-avatar-lg">👨‍🎓</div>
+        <div class="member-info">
+          <div class="member-name">양희재</div>
+          <div class="member-role">석박통합과정</div>
+          <div class="member-research">Computer Vision, 3D Gaussian Splatting</div>
+          <div class="member-links"><a class="member-link" href="#">Scholar</a><a class="member-link" href="#">Email</a></div>
         </div>
       </div>
-      <div class="member-card-lg">
-        <div class="avatar-lg">👨‍🎓</div>
-        <div class="info">
-          <div class="name">박민준</div>
-          <div class="role">석박통합과정</div>
-          <div class="email">minjun@skku.edu</div>
+      <div class="member-card">
+        <div class="member-avatar-lg">👨‍🎓</div>
+        <div class="member-info">
+          <div class="member-name">박민준</div>
+          <div class="member-role">석박통합과정</div>
+          <div class="member-research">Vision-Language Adaptation, Dense Prediction</div>
+          <div class="member-links"><a class="member-link" href="#">Scholar</a><a class="member-link" href="#">Email</a></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MS Students -->
+  <!-- MS -->
   <div class="member-group">
-    <div class="member-group-title">MS Students</div>
-    <div class="member-grid-lg">
-      <div class="member-card-lg">
-        <div class="avatar-lg">👩‍🎓</div>
-        <div class="info">
-          <div class="name">최재원</div>
-          <div class="role">석사과정</div>
-          <div class="email">jaewon@skku.edu</div>
+    <div class="group-label">MS Students</div>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-avatar-lg">👩‍🎓</div>
+        <div class="member-info">
+          <div class="member-name">최재원</div>
+          <div class="member-role">석사과정</div>
+          <div class="member-research">Video Generation, Diffusion Models</div>
+          <div class="member-links"><a class="member-link" href="#">Scholar</a><a class="member-link" href="#">Email</a></div>
         </div>
       </div>
-      <div class="member-card-lg">
-        <div class="avatar-lg">👨‍🎓</div>
-        <div class="info">
-          <div class="name">한수진</div>
-          <div class="role">석사과정</div>
-          <div class="email">sujin@skku.edu</div>
+      <div class="member-card">
+        <div class="member-avatar-lg">👩‍🎓</div>
+        <div class="member-info">
+          <div class="member-name">한수진</div>
+          <div class="member-role">석사과정</div>
+          <div class="member-research">Efficient VLMs, Token Pruning</div>
+          <div class="member-links"><a class="member-link" href="#">Scholar</a><a class="member-link" href="#">Email</a></div>
         </div>
       </div>
-      <div class="member-card-lg">
-        <div class="avatar-lg">👨‍🎓</div>
-        <div class="info">
-          <div class="name">오민재</div>
-          <div class="role">석사과정</div>
-          <div class="email">minjae@skku.edu</div>
+      <div class="member-card">
+        <div class="member-avatar-lg">👨‍🎓</div>
+        <div class="member-info">
+          <div class="member-name">오민재</div>
+          <div class="member-role">석사과정</div>
+          <div class="member-research">Information Retrieval, Text Mining</div>
+          <div class="member-links"><a class="member-link" href="#">Scholar</a><a class="member-link" href="#">Email</a></div>
         </div>
       </div>
     </div>
@@ -204,9 +163,9 @@
       <p class="footer-desc">Information &amp; Intelligence System Laboratory<br />성균관대학교 소프트웨어융합대학</p>
     </div>
     <div class="footer-links">
-      <a href="research.html">Research</a><a href="members.html">Members</a>
-      <a href="publications.html">Publications</a><a href="news.html">News</a>
-      <a href="contact.html">Contact</a>
+      <a href="introduction.html">About Us</a><a href="fields.html">Research</a>
+      <a href="publications.html">Publications</a><a href="members.html">Members</a>
+      <a href="demos-nlp.html">Demos</a><a href="boards.html">Boards</a>
     </div>
   </div>
   <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>

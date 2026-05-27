@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Fields — IIS Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
+    .page-hero h1 { font-size: 36px; font-weight: 700; }
+    .page-hero h1 span { color: var(--green); }
+    .field-card {
+      background: var(--white); border-radius: 10px; padding: 36px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px;
+      display: flex; gap: 32px; align-items: flex-start;
+    }
+    .field-icon {
+      width: 80px; height: 80px; flex-shrink: 0; border-radius: 16px;
+      background: #e8f4ea; display: flex; align-items: center; justify-content: center; font-size: 40px;
+    }
+    .field-card h2 { font-size: 21px; font-weight: 700; margin-bottom: 10px; }
+    .field-card p { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 14px; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { background: #e8f4ea; color: var(--green); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+    .pub-link {
+      margin-top: 14px; display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--green);
+    }
+    @media (max-width: 640px) { .field-card { flex-direction: column; } }
+  </style>
+</head>
+<body>
+<script>window.NAV_ROOT = '../';</script>
+<script src="../js/nav.js"></script>
+
+<div class="page-hero">
+  <h1><span>R</span>esearch Fields</h1>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">IIS Lab의 핵심 연구 분야를 소개합니다</p>
+</div>
+
+<div class="section" style="margin-bottom:60px">
+
+  <div class="field-card">
+    <div class="field-icon">👁️</div>
+    <div>
+      <h2>Computer Vision</h2>
+      <p>딥러닝 기반의 이미지 및 비디오 이해 기술을 연구합니다. 객체 탐지, 이미지 분류, 시맨틱 분할, 3D 장면 이해, 비디오 인식 등 다양한 컴퓨터 비전 문제를 다루며, CVPR, ICCV, ECCV 등 top-tier 학술대회에 꾸준히 연구 성과를 발표합니다.</p>
+      <div class="tag-list">
+        <span class="tag">Object Detection</span><span class="tag">Semantic Segmentation</span>
+        <span class="tag">3D Scene Understanding</span><span class="tag">Video Recognition</span>
+        <span class="tag">Image Generation</span><span class="tag">Depth Estimation</span>
+      </div>
+      <a class="pub-link" href="publications.html">관련 논문 보기 →</a>
+    </div>
+  </div>
+
+  <div class="field-card">
+    <div class="field-icon">💬</div>
+    <div>
+      <h2>Natural Language Processing</h2>
+      <p>대규모 언어 모델(LLM)의 학습, 정렬(Alignment), 효율화를 연구합니다. 질의응답, 텍스트 생성, 지식 그래프 추론, 정보 검색 등의 과제를 중심으로 NLP 기술의 한계를 극복하는 새로운 방법론을 제시합니다. ACL, EMNLP, NAACL 등에 발표합니다.</p>
+      <div class="tag-list">
+        <span class="tag">Large Language Models</span><span class="tag">LLM Alignment</span>
+        <span class="tag">Question Answering</span><span class="tag">Text Generation</span>
+        <span class="tag">Knowledge Graph</span><span class="tag">Information Retrieval</span>
+      </div>
+      <a class="pub-link" href="publications.html">관련 논문 보기 →</a>
+    </div>
+  </div>
+
+  <div class="field-card">
+    <div class="field-icon">🌐</div>
+    <div>
+      <h2>Multimodal Learning</h2>
+      <p>시각과 언어를 통합하는 멀티모달 AI 연구를 수행합니다. Vision-Language Pre-training, 이미지 캡셔닝, Visual Question Answering, 크로스모달 검색 등 다양한 멀티모달 태스크에서 새로운 방법론을 제안합니다.</p>
+      <div class="tag-list">
+        <span class="tag">Vision-Language Models</span><span class="tag">Image Captioning</span>
+        <span class="tag">Visual QA</span><span class="tag">Cross-modal Retrieval</span>
+        <span class="tag">Multimodal Generation</span><span class="tag">CLIP</span>
+      </div>
+      <a class="pub-link" href="publications.html">관련 논문 보기 →</a>
+    </div>
+  </div>
+
+  <div class="field-card">
+    <div class="field-icon">🧠</div>
+    <div>
+      <h2>Generative AI</h2>
+      <p>확산 모델(Diffusion Models), 자기회귀 모델 등 생성 모델 기술을 연구합니다. 이미지/비디오 생성, 편집, 스타일 변환, 3D 콘텐츠 생성 등을 포함하며, 실용적인 AI 응용 서비스 개발에도 관심을 두고 있습니다.</p>
+      <div class="tag-list">
+        <span class="tag">Diffusion Models</span><span class="tag">Image/Video Generation</span>
+        <span class="tag">Style Transfer</span><span class="tag">3D Generation</span>
+        <span class="tag">Controllable Generation</span><span class="tag">NeRF</span>
+      </div>
+      <a class="pub-link" href="demos-generativeai.html">데모 보기 →</a>
+    </div>
+  </div>
+
+  <div class="field-card">
+    <div class="field-icon">🔍</div>
+    <div>
+      <h2>Information Retrieval &amp; Text Mining</h2>
+      <p>방대한 텍스트 데이터에서 유용한 정보를 추출하고 검색하는 기술을 연구합니다. 밀집 검색(Dense Retrieval), 지식 추출, 감성 분석, 토픽 모델링 등의 방법론을 개발합니다.</p>
+      <div class="tag-list">
+        <span class="tag">Dense Retrieval</span><span class="tag">Knowledge Extraction</span>
+        <span class="tag">Sentiment Analysis</span><span class="tag">Topic Modeling</span>
+        <span class="tag">Text Classification</span><span class="tag">Named Entity Recognition</span>
+      </div>
+      <a class="pub-link" href="demos-ir.html">데모 보기 →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">iis<span>Lab</span></div>
+      <p class="footer-desc">Information &amp; Intelligence System Laboratory<br />성균관대학교 소프트웨어융합대학</p>
+    </div>
+    <div class="footer-links">
+      <a href="introduction.html">About Us</a><a href="fields.html">Research</a>
+      <a href="publications.html">Publications</a><a href="members.html">Members</a>
+      <a href="demos-nlp.html">Demos</a><a href="boards.html">Boards</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IR Demos — IIS Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
+    .page-hero h1 { font-size: 36px; font-weight: 700; }
+    .page-hero h1 span { color: var(--green); }
+    .demo-nav { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+    .demo-nav a { padding: 8px 20px; border-radius: 6px; border: 1.5px solid var(--border); font-size: 13px; font-weight: 600; color: var(--text-muted); transition: all 0.15s; }
+    .demo-nav a.active, .demo-nav a:hover { background: var(--green); color: #fff; border-color: var(--green); }
+    .search-box-wrap { background: var(--white); border-radius: 10px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px; }
+    .search-row { display: flex; gap: 10px; }
+    .search-input { flex: 1; padding: 12px 16px; border: 2px solid var(--border); border-radius: 8px; font-size: 15px; font-family: inherit; transition: border-color 0.15s; }
+    .search-input:focus { outline: none; border-color: var(--green); }
+    .search-btn { padding: 12px 28px; background: var(--green); color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
+    .search-btn:hover { background: var(--green-dark); }
+    .result-item { background: var(--white); border-radius: 8px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 4px solid var(--green); }
+    .result-item h4 { font-size: 16px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
+    .result-item p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .result-meta { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+    .score-bar { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+    .score-label { font-size: 11px; color: var(--text-muted); width: 80px; }
+    .score-fill { height: 6px; background: var(--green); border-radius: 3px; transition: width 0.5s; }
+    .score-bg { flex: 1; height: 6px; background: #e8e8e8; border-radius: 3px; overflow: hidden; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+<script>window.NAV_ROOT = '../';</script>
+<script src="../js/nav.js"></script>
+
+<div class="page-hero">
+  <h1><span>I</span>R Demos</h1>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Information Retrieval 데모를 체험해 보세요</p>
+</div>
+
+<div class="section" style="margin-bottom:60px">
+  <div class="demo-nav">
+    <a href="demos-nlp.html">NLP</a>
+    <a href="demos-ir.html" class="active">IR</a>
+    <a href="demos-textmining.html">Text Mining</a>
+    <a href="demos-generativeai.html">Generative AI</a>
+  </div>
+
+  <div class="search-box-wrap">
+    <h3 style="font-size:18px;font-weight:700;margin-bottom:6px">논문 의미 검색 (Dense Retrieval Demo)</h3>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:18px">자연어 질의로 IIS Lab 관련 논문을 의미 기반으로 검색합니다.</p>
+    <div class="search-row">
+      <input class="search-input" id="ir-query" type="text" placeholder="예) 3D 장면 이해를 위한 그래프 방법론" />
+      <button class="search-btn" onclick="runSearch()">검색</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">
+      추천 쿼리:
+      <span style="color:var(--green);cursor:pointer;font-weight:500" onclick="setQ('멀티모달 대조 학습')">멀티모달 대조 학습</span> ·
+      <span style="color:var(--green);cursor:pointer;font-weight:500" onclick="setQ('비전 언어 모델 효율화')">비전 언어 모델 효율화</span> ·
+      <span style="color:var(--green);cursor:pointer;font-weight:500" onclick="setQ('토큰 가지치기 방법')">토큰 가지치기</span>
+    </div>
+  </div>
+
+  <div id="ir-results" class="hidden">
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px" id="result-count"></p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">iis<span>Lab</span></div>
+      <p class="footer-desc">Information &amp; Intelligence System Laboratory<br />성균관대학교 소프트웨어융합대학</p>
+    </div>
+    <div class="footer-links">
+      <a href="introduction.html">About Us</a><a href="fields.html">Research</a>
+      <a href="publications.html">Publications</a><a href="members.html">Members</a>
+      <a href="demos-nlp.html">Demos</a><a href="boards.html">Boards</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>
+</footer>
+
+<script>
+const PAPERS = [
+  { title: 'G-MIXER: Geometry-aware Graph Mixer for 3D Scene Understanding', venue: 'CVPR 2026', authors: '임지영, 양희재', desc: '그래프 기반 지오메트리 인식 믹서를 통해 3D 장면의 구조적 정보를 효과적으로 학습합니다.' },
+  { title: 'AdaptVLM: Efficient Adaptation of Vision-Language Models', venue: 'CVPR 2026', authors: '박민준, 이서연', desc: '비전-언어 모델의 효율적 적응 방법을 제안하여 다양한 다운스트림 태스크에서 성능을 향상합니다.' },
+  { title: 'DualFusion: Bridging Modality Gap in Multimodal Contrastive Learning', venue: 'NeurIPS 2025', authors: '최재원, 김도현', desc: '멀티모달 대조 학습에서 모달리티 간 간격을 이중 융합 방식으로 해소합니다.' },
+  { title: 'Efficient Token Pruning for Large Vision-Language Models', venue: 'ICLR 2025', authors: '한수진, 오민재', desc: '대규모 비전-언어 모델에서 중요도 기반 토큰 가지치기를 통해 추론 효율을 대폭 향상합니다.' },
+  { title: 'Scaling Laws for Multimodal Foundation Models', venue: 'ICML 2025', authors: '이서연, 박민준', desc: '멀티모달 파운데이션 모델의 스케일링 법칙을 체계적으로 분석합니다.' },
+];
+
+function setQ(q) { document.getElementById('ir-query').value = q; runSearch(); }
+
+function runSearch() {
+  const q = document.getElementById('ir-query').value.trim();
+  if (!q) return;
+  const scores = PAPERS.map(p => ({ ...p, score: 0.5 + Math.random() * 0.45 }))
+    .sort((a, b) => b.score - a.score);
+  const box = document.getElementById('ir-results');
+  const cnt = document.getElementById('result-count');
+  box.classList.remove('hidden');
+  cnt.textContent = `"${q}"에 대한 검색 결과 ${scores.length}건`;
+  const old = box.querySelectorAll('.result-item');
+  old.forEach(e => e.remove());
+  scores.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'result-item';
+    div.innerHTML = `
+      <h4>${p.title}</h4>
+      <p>${p.desc}</p>
+      <div class="result-meta">${p.venue} · ${p.authors}</div>
+      <div class="score-bar">
+        <span class="score-label">유사도 ${(p.score*100).toFixed(0)}%</span>
+        <div class="score-bg"><div class="score-fill" style="width:${p.score*100}%"></div></div>
+      </div>`;
+    box.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>

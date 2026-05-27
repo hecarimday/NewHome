@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boards — IIS Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
+    .page-hero h1 { font-size: 36px; font-weight: 700; }
+    .page-hero h1 span { color: var(--green); }
+
+    /* Board tabs */
+    .board-tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 0; }
+    .board-tab {
+      padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer;
+      color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px;
+      transition: all 0.15s;
+    }
+    .board-tab.active { color: var(--green); border-bottom-color: var(--green); }
+    .board-tab:hover { color: var(--green); }
+
+    /* Board list */
+    .board-wrap { background: var(--white); border-radius: 0 0 10px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); overflow: hidden; }
+    .board-top { display: flex; justify-content: flex-end; padding: 14px 20px; border-bottom: 1px solid var(--border); }
+    .write-btn { padding: 8px 18px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .write-btn:hover { background: var(--green-dark); }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead th { background: #f7f7f4; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); padding: 12px 20px; text-align: left; border-bottom: 1px solid var(--border); }
+    tbody td { padding: 14px 20px; border-bottom: 1px solid #f0f0ec; font-size: 14px; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #fafaf8; }
+    .post-title { font-weight: 500; color: var(--text); cursor: pointer; transition: color 0.15s; }
+    .post-title:hover { color: var(--green); }
+    .post-title .new { display: inline-block; background: #e8f4ea; color: var(--green); font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+    .notice-row td { background: #f7fbf8; font-weight: 500; }
+    td.num { color: var(--text-muted); font-size: 13px; }
+    td.author { font-size: 13px; color: var(--text-muted); }
+    td.date { font-size: 12px; color: var(--text-muted); }
+    td.views { font-size: 12px; color: var(--text-muted); }
+
+    /* Pagination */
+    .pagination { display: flex; justify-content: center; gap: 4px; padding: 20px; }
+    .page-btn { width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border); background: var(--white); cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .page-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+    .page-btn:hover:not(.active) { border-color: var(--green); color: var(--green); }
+
+    /* Search */
+    .board-search { display: flex; gap: 8px; padding: 14px 20px; border-top: 1px solid var(--border); }
+    .board-search select { padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; background: var(--bg); }
+    .board-search input { flex: 1; padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
+    .board-search input:focus { outline: none; border-color: var(--green); }
+    .board-search button { padding: 7px 16px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+
+    /* Modal */
+    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+    .modal-bg.open { display: flex; }
+    .modal { background: var(--white); border-radius: 10px; width: 90%; max-width: 560px; padding: 32px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    .modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+    .modal-field { margin-bottom: 14px; }
+    .modal-field label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; }
+    .modal-field input, .modal-field textarea, .modal-field select { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; }
+    .modal-field textarea { min-height: 120px; resize: vertical; }
+    .modal-field input:focus, .modal-field textarea:focus { outline: none; border-color: var(--green); }
+    .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+    .modal-cancel { padding: 9px 20px; border: 1.5px solid var(--border); background: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; }
+    .modal-submit { padding: 9px 20px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body>
+<script>window.NAV_ROOT = '../';</script>
+<script src="../js/nav.js"></script>
+
+<div class="page-hero">
+  <h1><span>B</span>oards</h1>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">공지사항, 자유게시판, Q&amp;A를 확인하세요</p>
+</div>
+
+<div class="section" style="margin-bottom:60px">
+
+  <div style="background:var(--white);border-radius:10px 10px 0 0;box-shadow:0 2px 8px rgba(0,0,0,0.05)">
+    <div class="board-tabs">
+      <div class="board-tab active" onclick="switchTab(this,'notice')">📢 공지사항</div>
+      <div class="board-tab" onclick="switchTab(this,'free')">💬 자유게시판</div>
+      <div class="board-tab" onclick="switchTab(this,'qa')">❓ Q&amp;A</div>
+    </div>
+  </div>
+
+  <div class="board-wrap">
+    <div class="board-top">
+      <button class="write-btn" onclick="openWrite()">✏️ 글쓰기</button>
+    </div>
+
+    <!-- Notice Board -->
+    <div id="board-notice">
+      <table>
+        <thead><tr><th style="width:60px">번호</th><th>제목</th><th style="width:100px">작성자</th><th style="width:100px">날짜</th><th style="width:60px">조회</th></tr></thead>
+        <tbody>
+          <tr class="notice-row">
+            <td class="num">📌</td>
+            <td class="post-title" onclick="openPost('2026년 하반기 대학원생 모집 공고','관리자','2026.05.20','석박사 통합과정 및 박사과정 학생을 모집합니다. 지원 마감: 2026.06.30')">2026년 하반기 대학원생 모집 공고 <span class="new">NEW</span></td>
+            <td class="author">관리자</td><td class="date">2026.05.20</td><td class="views">142</td>
+          </tr>
+          <tr class="notice-row">
+            <td class="num">📌</td>
+            <td class="post-title" onclick="openPost('연구실 NAS 사용 안내','관리자','2026.04.01','NAS 접속 방법 및 데이터 관리 규정을 안내합니다.')">연구실 NAS 사용 안내</td>
+            <td class="author">관리자</td><td class="date">2026.04.01</td><td class="views">87</td>
+          </tr>
+          <tr>
+            <td class="num">15</td>
+            <td class="post-title" onclick="openPost('CVPR 2026 논문 게재 축하','관리자','2026.05.15','임지영, 양희재, 박민준, 이서연 학생의 CVPR 2026 논문 게재를 축하합니다!')">CVPR 2026 논문 게재 축하 🎉 <span class="new">NEW</span></td>
+            <td class="author">관리자</td><td class="date">2026.05.15</td><td class="views">210</td>
+          </tr>
+          <tr>
+            <td class="num">14</td>
+            <td class="post-title" onclick="openPost('2026 봄학기 정기 세미나 일정','관리자','2026.03.02','봄학기 정기 세미나 일정을 안내드립니다. 매주 금요일 14:00 ~ 16:00')">2026 봄학기 정기 세미나 일정</td>
+            <td class="author">관리자</td><td class="date">2026.03.02</td><td class="views">134</td>
+          </tr>
+          <tr>
+            <td class="num">13</td>
+            <td class="post-title" onclick="openPost('NeurIPS 2025 Best Paper Award 수상','관리자','2025.12.11','최재원 학생이 NeurIPS 2025 Workshop에서 Best Paper Award를 수상했습니다.')">NeurIPS 2025 Best Paper Award 수상 🏆</td>
+            <td class="author">관리자</td><td class="date">2025.12.11</td><td class="views">389</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Free Board -->
+    <div id="board-free" style="display:none">
+      <table>
+        <thead><tr><th style="width:60px">번호</th><th>제목</th><th style="width:100px">작성자</th><th style="width:100px">날짜</th><th style="width:60px">조회</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="num">8</td>
+            <td class="post-title" onclick="openPost('CVPR Denver 방문 후기','임지영','2026.06.01','Denver에서 열린 CVPR 2026 현장 분위기를 공유합니다!')">CVPR Denver 방문 후기 ✈️ <span class="new">NEW</span></td>
+            <td class="author">임지영</td><td class="date">2026.06.01</td><td class="views">67</td>
+          </tr>
+          <tr>
+            <td class="num">7</td>
+            <td class="post-title" onclick="openPost('추천 논문 리딩 리스트 (2026 Q2)','양희재','2026.04.15','요즘 읽고 있는 논문들을 공유합니다.')">추천 논문 리딩 리스트 (2026 Q2)</td>
+            <td class="author">양희재</td><td class="date">2026.04.15</td><td class="views">98</td>
+          </tr>
+          <tr>
+            <td class="num">6</td>
+            <td class="post-title" onclick="openPost('봄 MT 사진 공유','최재원','2026.04.05','지난 봄 MT 사진입니다 ㅎㅎ')">봄 MT 사진 공유 🌸</td>
+            <td class="author">최재원</td><td class="date">2026.04.05</td><td class="views">145</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- QA Board -->
+    <div id="board-qa" style="display:none">
+      <table>
+        <thead><tr><th style="width:60px">번호</th><th>제목</th><th style="width:100px">작성자</th><th style="width:100px">날짜</th><th style="width:60px">조회</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="num">5</td>
+            <td class="post-title" onclick="openPost('[Q] 대학원 지원 시 필요 서류가 궁금합니다','익명','2026.05.10','지원에 필요한 서류와 절차를 알고 싶습니다.')"><span style="color:#c07820;font-weight:600">[답변완료]</span> 대학원 지원 시 필요 서류가 궁금합니다 <span class="new">NEW</span></td>
+            <td class="author">익명</td><td class="date">2026.05.10</td><td class="views">234</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td class="post-title" onclick="openPost('[Q] 학부생 인턴십 관련 문의','익명','2026.03.20','학부생 인턴십 기회가 있는지 문의드립니다.')"><span style="color:#c07820;font-weight:600">[답변완료]</span> 학부생 인턴십 관련 문의</td>
+            <td class="author">익명</td><td class="date">2026.03.20</td><td class="views">178</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td class="post-title" onclick="openPost('[Q] 연구 분야 선택 조언 요청','익명','2026.02.15','CV와 NLP 중 어떤 분야를 선택하면 좋을지 조언 부탁드립니다.')"><span style="color:#3a7d44;font-weight:600">[미답변]</span> 연구 분야 선택 조언 요청</td>
+            <td class="author">익명</td><td class="date">2026.02.15</td><td class="views">312</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">›</button>
+    </div>
+
+    <div class="board-search">
+      <select><option>제목</option><option>내용</option><option>작성자</option></select>
+      <input type="text" placeholder="검색어를 입력하세요" />
+      <button>검색</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Post View Modal -->
+<div class="modal-bg" id="view-modal" onclick="closeModal('view-modal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 id="view-title"></h3>
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+      <span id="view-meta"></span>
+    </div>
+    <div id="view-content" style="font-size:14px;line-height:1.8;color:var(--text-muted)"></div>
+    <div class="modal-btns"><button class="modal-cancel" onclick="closeModal('view-modal')">닫기</button></div>
+  </div>
+</div>
+
+<!-- Write Modal -->
+<div class="modal-bg" id="write-modal" onclick="closeModal('write-modal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3>✏️ 글쓰기</h3>
+    <div class="modal-field"><label>카테고리</label><select><option>공지사항</option><option>자유게시판</option><option>Q&A</option></select></div>
+    <div class="modal-field"><label>제목</label><input type="text" placeholder="제목을 입력하세요" /></div>
+    <div class="modal-field"><label>작성자</label><input type="text" placeholder="이름 또는 닉네임" /></div>
+    <div class="modal-field"><label>내용</label><textarea placeholder="내용을 입력하세요"></textarea></div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal('write-modal')">취소</button>
+      <button class="modal-submit" onclick="submitPost()">등록</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">iis<span>Lab</span></div>
+      <p class="footer-desc">Information &amp; Intelligence System Laboratory<br />성균관대학교 소프트웨어융합대학</p>
+    </div>
+    <div class="footer-links">
+      <a href="introduction.html">About Us</a><a href="fields.html">Research</a>
+      <a href="publications.html">Publications</a><a href="members.html">Members</a>
+      <a href="demos-nlp.html">Demos</a><a href="boards.html">Boards</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>
+</footer>
+
+<script>
+function switchTab(el, board) {
+  document.querySelectorAll('.board-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  ['notice','free','qa'].forEach(b => document.getElementById('board-'+b).style.display = b===board ? 'block' : 'none');
+}
+function openPost(title, author, date, content) {
+  document.getElementById('view-title').textContent = title;
+  document.getElementById('view-meta').textContent = `작성자: ${author} · ${date}`;
+  document.getElementById('view-content').textContent = content;
+  document.getElementById('view-modal').classList.add('open');
+}
+function openWrite() { document.getElementById('write-modal').classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function submitPost() {
+  alert('게시글이 등록되었습니다!\n(실제 백엔드 연동 시 데이터베이스에 저장됩니다.)');
+  closeModal('write-modal');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NLP Demos — IIS Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
+    .page-hero h1 { font-size: 36px; font-weight: 700; }
+    .page-hero h1 span { color: var(--green); }
+    .demo-nav { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+    .demo-nav a {
+      padding: 8px 20px; border-radius: 6px; border: 1.5px solid var(--border);
+      font-size: 13px; font-weight: 600; color: var(--text-muted); transition: all 0.15s;
+    }
+    .demo-nav a.active, .demo-nav a:hover { background: var(--green); color: #fff; border-color: var(--green); }
+    .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .demo-card { background: var(--white); border-radius: 10px; padding: 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .demo-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .demo-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6; }
+    textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; resize: vertical; min-height: 90px; }
+    textarea:focus { outline: none; border-color: var(--green); }
+    .run-btn { margin-top: 10px; padding: 9px 24px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .run-btn:hover { background: var(--green-dark); }
+    .result-box { margin-top: 14px; padding: 14px; background: #f4f4f0; border-radius: 6px; font-size: 14px; line-height: 1.75; border: 1px solid var(--border); min-height: 48px; }
+    .tag-chip { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin: 3px; }
+    @media (max-width: 768px) { .demo-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<script>window.NAV_ROOT = '../';</script>
+<script src="../js/nav.js"></script>
+
+<div class="page-hero">
+  <h1><span>N</span>LP Demos</h1>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Natural Language Processing 데모를 체험해 보세요</p>
+</div>
+
+<div class="section" style="margin-bottom:60px">
+  <div class="demo-nav">
+    <a href="demos-nlp.html" class="active">NLP</a>
+    <a href="demos-ir.html">IR</a>
+    <a href="demos-textmining.html">Text Mining</a>
+    <a href="demos-generativeai.html">Generative AI</a>
+  </div>
+
+  <div class="demo-grid">
+
+    <div class="demo-card">
+      <h3>감성 분석 (Sentiment Analysis)</h3>
+      <p>텍스트의 긍정/부정/중립 감성을 분석합니다.</p>
+      <textarea id="sa-input" placeholder="분석할 텍스트를 입력하세요&#10;예) 이 영화는 정말 재미있고 감동적이었습니다."></textarea>
+      <button class="run-btn" onclick="runSentiment()">분석하기</button>
+      <div class="result-box" id="sa-result" style="display:none"></div>
+    </div>
+
+    <div class="demo-card">
+      <h3>개체명 인식 (Named Entity Recognition)</h3>
+      <p>텍스트에서 인물, 장소, 기관, 날짜 등의 개체명을 인식합니다.</p>
+      <textarea id="ner-input" placeholder="예) 삼성전자는 2024년 서울 강남구에서 신제품을 발표했습니다."></textarea>
+      <button class="run-btn" onclick="runNER()">인식하기</button>
+      <div class="result-box" id="ner-result" style="display:none"></div>
+    </div>
+
+    <div class="demo-card">
+      <h3>텍스트 요약 (Summarization)</h3>
+      <p>긴 문서나 기사를 짧게 요약합니다.</p>
+      <textarea id="sum-input" placeholder="요약할 텍스트를 입력하세요..." style="min-height:120px"></textarea>
+      <button class="run-btn" onclick="runSummary()">요약하기</button>
+      <div class="result-box" id="sum-result" style="display:none"></div>
+    </div>
+
+    <div class="demo-card">
+      <h3>질의응답 (Question Answering)</h3>
+      <p>주어진 문맥을 기반으로 질문에 답변합니다.</p>
+      <input id="qa-context" type="text" placeholder="문맥: 예) IIS Lab은 성균관대학교에 위치한 AI 연구실입니다."
+        style="width:100%;padding:9px 14px;border:1.5px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;margin-bottom:8px"/>
+      <input id="qa-question" type="text" placeholder="질문: 예) IIS Lab은 어디에 있나요?"
+        style="width:100%;padding:9px 14px;border:1.5px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit"/>
+      <button class="run-btn" onclick="runQA()">답변 생성</button>
+      <div class="result-box" id="qa-result" style="display:none"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">iis<span>Lab</span></div>
+      <p class="footer-desc">Information &amp; Intelligence System Laboratory<br />성균관대학교 소프트웨어융합대학</p>
+    </div>
+    <div class="footer-links">
+      <a href="introduction.html">About Us</a><a href="fields.html">Research</a>
+      <a href="publications.html">Publications</a><a href="members.html">Members</a>
+      <a href="demos-nlp.html">Demos</a><a href="boards.html">Boards</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>
+</footer>
+
+<script>
+/* ── Demo 시뮬레이션 (실제 API 연동 시 교체) ── */
+function runSentiment() {
+  const text = document.getElementById('sa-input').value.trim();
+  if (!text) return alert('텍스트를 입력해 주세요.');
+  const scores = { pos: Math.random()*0.5+0.3, neg: Math.random()*0.3, neu: 0 };
+  scores.neu = 1 - scores.pos - scores.neg;
+  const label = scores.pos > scores.neg ? '긍정 😊' : '부정 😞';
+  const r = document.getElementById('sa-result');
+  r.style.display = 'block';
+  r.innerHTML = `<b>결과:</b> <span class="tag-chip" style="background:#e8f4ea;color:var(--green)">${label}</span><br/>
+    긍정: ${(scores.pos*100).toFixed(1)}% &nbsp; 부정: ${(scores.neg*100).toFixed(1)}% &nbsp; 중립: ${(scores.neu*100).toFixed(1)}%`;
+}
+
+function runNER() {
+  const text = document.getElementById('ner-input').value.trim();
+  if (!text) return alert('텍스트를 입력해 주세요.');
+  const colors = { ORG:'#dce8ff,#3a6fd8', LOC:'#e8f4ea,#2d7a3a', DATE:'#fff3e0,#c0782a', PER:'#f3e8ff,#7a3a9a' };
+  const entities = [
+    { text: '삼성전자', label: 'ORG' }, { text: '서울', label: 'LOC' },
+    { text: '2024년', label: 'DATE' }, { text: '강남구', label: 'LOC' }
+  ];
+  const r = document.getElementById('ner-result');
+  r.style.display = 'block';
+  r.innerHTML = '<b>인식된 개체명:</b><br/><br/>' + entities.map(e => {
+    const [bg, fg] = colors[e.label].split(',');
+    return `<span class="tag-chip" style="background:${bg};color:${fg}">${e.text} <b>${e.label}</b></span>`;
+  }).join(' ');
+}
+
+function runSummary() {
+  const text = document.getElementById('sum-input').value.trim();
+  if (!text) return alert('텍스트를 입력해 주세요.');
+  const preview = text.length > 80 ? text.slice(0, 80) + '...' : text;
+  const r = document.getElementById('sum-result');
+  r.style.display = 'block';
+  r.innerHTML = `<b>요약:</b><br/>${preview}<br/><br/><span style="color:var(--text-muted);font-size:12px">* 실제 모델 API 연동 시 정확한 요약이 제공됩니다.</span>`;
+}
+
+function runQA() {
+  const ctx = document.getElementById('qa-context').value.trim();
+  const q = document.getElementById('qa-question').value.trim();
+  if (!ctx || !q) return alert('문맥과 질문을 모두 입력해 주세요.');
+  const r = document.getElementById('qa-result');
+  r.style.display = 'block';
+  r.innerHTML = `<b>답변:</b> 성균관대학교<br/><br/><span style="color:var(--text-muted);font-size:12px">* 실제 모델 API 연동 시 정확한 답변이 제공됩니다.</span>`;
+}
+</script>
+</body>
+</html>

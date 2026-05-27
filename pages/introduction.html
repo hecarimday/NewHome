@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction — IIS Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
+    .page-hero h1 { font-size: 36px; font-weight: 700; }
+    .page-hero h1 span { color: var(--green); }
+    .intro-grid { display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; }
+    .intro-text { background: var(--white); border-radius: 10px; padding: 36px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .intro-text h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--green); }
+    .intro-text p { font-size: 14px; color: var(--text-muted); line-height: 1.85; margin-bottom: 16px; }
+    .intro-text p:last-child { margin-bottom: 0; }
+    .intro-sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .info-box { background: var(--white); border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .info-box h3 { font-size: 14px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; border-bottom: 1.5px solid #e8f4ea; padding-bottom: 8px; }
+    .info-row { display: flex; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+    .info-row .label { color: var(--text-muted); min-width: 60px; flex-shrink: 0; }
+    .info-row .value { font-weight: 500; color: var(--text); }
+    .keyword-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .keyword { background: #e8f4ea; color: var(--green); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+    @media (max-width: 900px) { .intro-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<script>window.NAV_ROOT = '../';</script>
+<script src="../js/nav.js"></script>
+
+<div class="page-hero">
+  <h1><span>A</span>bout Us — Introduction</h1>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Information &amp; Intelligence System Laboratory</p>
+</div>
+
+<div class="section" style="margin-bottom:60px">
+  <div class="intro-grid">
+    <div class="intro-text">
+      <h2>연구실 소개</h2>
+      <p>
+        IIS Lab (Information &amp; Intelligence System Laboratory)은 성균관대학교 소프트웨어융합대학에 위치한 인공지능 연구실입니다.
+        본 연구실은 컴퓨터 비전(Computer Vision), 자연어처리(Natural Language Processing),
+        멀티모달 학습(Multimodal Learning), 생성 AI(Generative AI) 분야의 핵심 원천 기술 연구를 수행합니다.
+      </p>
+      <p>
+        우리 연구실은 딥러닝 기반의 시각 인식 기술, 대규모 언어 모델(LLM) 연구, 그리고 시각과 언어를 통합하는
+        멀티모달 AI 기술 개발에 집중하고 있습니다. 이를 통해 현실 세계의 복잡한 문제를 해결하는 AI 시스템을 만들고자 합니다.
+      </p>
+      <p>
+        국내외 top-tier 학술대회(CVPR, ICCV, ECCV, NeurIPS, ICML, ICLR, ACL, EMNLP)에 꾸준히
+        연구 성과를 발표하고 있으며, 정부 기관 및 민간 기업과의 산학협력 연구도 활발히 진행하고 있습니다.
+      </p>
+      <p>
+        연구에 열정을 가진 석·박사 과정 학생을 상시 모집하고 있습니다.
+        컴퓨터 비전, NLP, 멀티모달 AI 분야에 관심 있으신 분들의 많은 지원 바랍니다.
+      </p>
+
+      <h2 style="margin-top:28px">Research Keywords</h2>
+      <div class="keyword-list">
+        <span class="keyword">Computer Vision</span>
+        <span class="keyword">Object Detection</span>
+        <span class="keyword">Semantic Segmentation</span>
+        <span class="keyword">Video Understanding</span>
+        <span class="keyword">NLP</span>
+        <span class="keyword">Large Language Models</span>
+        <span class="keyword">Multimodal Learning</span>
+        <span class="keyword">Vision-Language Models</span>
+        <span class="keyword">Generative AI</span>
+        <span class="keyword">Diffusion Models</span>
+        <span class="keyword">3D Scene Understanding</span>
+        <span class="keyword">Information Retrieval</span>
+        <span class="keyword">Text Mining</span>
+      </div>
+    </div>
+
+    <div class="intro-sidebar">
+      <div class="info-box">
+        <h3>Lab Info</h3>
+        <div class="info-row"><span class="label">소속</span><span class="value">성균관대학교 소프트웨어융합대학</span></div>
+        <div class="info-row"><span class="label">위치</span><span class="value">자연과학캠퍼스 N동 XXX호</span></div>
+        <div class="info-row"><span class="label">설립</span><span class="value">20XX년</span></div>
+        <div class="info-row"><span class="label">이메일</span><span class="value">professor@skku.edu</span></div>
+      </div>
+
+      <div class="info-box">
+        <h3>빠른 링크</h3>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <a href="contact.html" style="font-size:13px;color:var(--green);font-weight:600;display:flex;align-items:center;gap:6px;">→ 연락하기 (Contact)</a>
+          <a href="members.html" style="font-size:13px;color:var(--green);font-weight:600;display:flex;align-items:center;gap:6px;">→ 연구원 소개 (Members)</a>
+          <a href="publications.html" style="font-size:13px;color:var(--green);font-weight:600;display:flex;align-items:center;gap:6px;">→ 논문 목록 (Publications)</a>
+          <a href="photos.html" style="font-size:13px;color:var(--green);font-weight:600;display:flex;align-items:center;gap:6px;">→ 사진 갤러리 (Photos)</a>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h3>모집 안내</h3>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.7">
+          석·박사 통합과정 및 박사과정 학생을 모집합니다.<br/>
+          관심 있으신 분은 CV를 첨부하여 이메일로 연락해 주세요.
+        </p>
+        <a href="contact.html" style="display:inline-block;margin-top:12px;background:var(--green);color:#fff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:5px;">지원하기</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">iis<span>Lab</span></div>
+      <p class="footer-desc">Information &amp; Intelligence System Laboratory<br />성균관대학교 소프트웨어융합대학</p>
+    </div>
+    <div class="footer-links">
+      <a href="introduction.html">About Us</a>
+      <a href="fields.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="members.html">Members</a>
+      <a href="demos-nlp.html">Demos</a>
+      <a href="boards.html">Boards</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>
+</footer>
+</body>
+</html>

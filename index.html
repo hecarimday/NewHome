@@ -10,43 +10,8 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
-<!-- ── Navbar ── -->
-<nav class="navbar">
-  <div class="nav-inner">
-    <a class="nav-logo" href="index.html">
-      <svg class="logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="38" height="38" rx="6" fill="#e8f4ea"/>
-        <path d="M19 7L6 17v15h9v-9h8v9h9V17L19 7z" fill="#3a7d44"/>
-        <rect x="15" y="22" width="8" height="10" rx="1" fill="#2d6035"/>
-      </svg>
-      <span class="logo-text">iis<span>Lab</span></span>
-    </a>
-
-    <ul class="nav-menu">
-      <li><a href="pages/research.html">Research</a></li>
-      <li><a href="pages/members.html">Members</a></li>
-      <li><a href="pages/publications.html">Publications</a></li>
-      <li><a href="pages/project.html">Project</a></li>
-      <li><a href="pages/seminar.html">Seminar</a></li>
-      <li><a href="pages/news.html">News</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <a class="btn-nas" href="#">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        NAS
-      </a>
-      <a class="btn-contact" href="pages/contact.html">Contact Us</a>
-      <button class="nav-icon-btn" aria-label="Search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      </button>
-      <button class="nav-icon-btn" aria-label="Login">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      </button>
-    </div>
-  </div>
-</nav>
+<script>window.NAV_ROOT = '';</script>
+<script src="js/nav.js"></script>
 
 <!-- ── Hero Title ── -->
 <section class="hero">
@@ -62,57 +27,52 @@
   <div class="carousel-wrapper">
     <div class="carousel-track">
 
-      <!-- Slide 1 -->
       <div class="carousel-slide">
         <div class="carousel-content">
           <span class="slide-tag">논문</span>
           <h2 class="slide-title">CVPR 2026 국제 학술대회 논문 3편 게재 승인</h2>
-          <p class="slide-desc">정보 및 지능 시스템 연구실에서 인공지능 및 컴퓨터 비전 분야 top-tier 국제 학술대회인 IEEE / CVF Computer Vision and Pattern Recognition Conference (CVPR)에 총 3편의 논문을 게재했습니다.</p>
-          <a class="slide-readmore" href="#">READ MORE &nbsp;→</a>
+          <p class="slide-desc">정보 및 지능 시스템 연구실에서 인공지능 및 컴퓨터 비전 분야 top-tier 국제 학술대회인 IEEE / CVF CVPR에 총 3편의 논문을 게재했습니다.</p>
+          <a class="slide-readmore" href="pages/publications.html">READ MORE &nbsp;→</a>
         </div>
         <div class="carousel-image-placeholder">🏔️</div>
       </div>
 
-      <!-- Slide 2 -->
       <div class="carousel-slide">
         <div class="carousel-content">
           <span class="slide-tag">수상</span>
           <h2 class="slide-title">NeurIPS 2025 Workshop Best Paper Award 수상</h2>
-          <p class="slide-desc">본 연구실 박사과정 학생이 NeurIPS 2025 Workshop에서 Best Paper Award를 수상했습니다. 멀티모달 학습 분야의 혁신적인 연구 성과를 인정받았습니다.</p>
-          <a class="slide-readmore" href="#">READ MORE &nbsp;→</a>
+          <p class="slide-desc">본 연구실 박사과정 학생이 NeurIPS 2025 Workshop에서 Best Paper Award를 수상했습니다.</p>
+          <a class="slide-readmore" href="pages/boards.html">READ MORE &nbsp;→</a>
         </div>
         <div class="carousel-image-placeholder">🏆</div>
       </div>
 
-      <!-- Slide 3 -->
       <div class="carousel-slide">
         <div class="carousel-content">
           <span class="slide-tag">신규 프로젝트</span>
           <h2 class="slide-title">과학기술정보통신부 대형 국책 연구과제 선정</h2>
-          <p class="slide-desc">정보 및 지능 시스템 연구실이 과기정통부 주관 차세대 AI 핵심기술 개발 사업의 주관 연구기관으로 선정되었습니다. 3년간 총 15억 원 규모의 연구를 수행할 예정입니다.</p>
-          <a class="slide-readmore" href="#">READ MORE &nbsp;→</a>
+          <p class="slide-desc">정보 및 지능 시스템 연구실이 과기정통부 주관 차세대 AI 핵심기술 개발 사업의 주관 연구기관으로 선정되었습니다.</p>
+          <a class="slide-readmore" href="pages/projects.html">READ MORE &nbsp;→</a>
         </div>
         <div class="carousel-image-placeholder">🔬</div>
       </div>
 
-      <!-- Slide 4 -->
       <div class="carousel-slide">
         <div class="carousel-content">
           <span class="slide-tag">채용</span>
           <h2 class="slide-title">2026년 석·박사 통합과정 대학원생 모집</h2>
-          <p class="slide-desc">IIS Lab에서 함께 연구할 열정 있는 석·박사 통합과정 학생을 모집합니다. 컴퓨터 비전, 자연어처리, 멀티모달 AI 분야에 관심 있는 분들의 지원을 환영합니다.</p>
-          <a class="slide-readmore" href="#">READ MORE &nbsp;→</a>
+          <p class="slide-desc">IIS Lab에서 함께 연구할 열정 있는 석·박사 통합과정 학생을 모집합니다.</p>
+          <a class="slide-readmore" href="pages/contact.html">READ MORE &nbsp;→</a>
         </div>
         <div class="carousel-image-placeholder">📚</div>
       </div>
 
-      <!-- Slide 5 -->
       <div class="carousel-slide">
         <div class="carousel-content">
           <span class="slide-tag">세미나</span>
           <h2 class="slide-title">정기 세미나: Large Language Models의 최신 동향</h2>
-          <p class="slide-desc">매주 금요일 진행되는 IIS Lab 정기 세미나에서 최신 LLM 연구 동향과 실제 적용 사례를 다룹니다. 외부 참가자도 환영합니다.</p>
-          <a class="slide-readmore" href="#">READ MORE &nbsp;→</a>
+          <p class="slide-desc">매주 금요일 IIS Lab 정기 세미나에서 최신 AI 연구 동향을 다룹니다.</p>
+          <a class="slide-readmore" href="pages/boards.html">READ MORE &nbsp;→</a>
         </div>
         <div class="carousel-image-placeholder">💡</div>
       </div>
@@ -126,13 +86,12 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
     </button>
   </div>
-
   <div class="carousel-dots">
-    <button class="carousel-dot active" aria-label="Slide 1"></button>
-    <button class="carousel-dot" aria-label="Slide 2"></button>
-    <button class="carousel-dot" aria-label="Slide 3"></button>
-    <button class="carousel-dot" aria-label="Slide 4"></button>
-    <button class="carousel-dot" aria-label="Slide 5"></button>
+    <button class="carousel-dot active"></button>
+    <button class="carousel-dot"></button>
+    <button class="carousel-dot"></button>
+    <button class="carousel-dot"></button>
+    <button class="carousel-dot"></button>
   </div>
 </div>
 
@@ -140,7 +99,7 @@
 <section class="section">
   <div class="section-header">
     <h2 class="section-title">OUR LAB</h2>
-    <a class="section-viewall" href="pages/members.html">VIEW ALL &nbsp;→</a>
+    <a class="section-viewall" href="pages/introduction.html">VIEW ALL &nbsp;→</a>
   </div>
   <p style="color:var(--text-muted);font-size:14px;margin-bottom:24px;max-width:640px;">
     Our laboratory focuses on advancing AI through cutting-edge research in Computer Vision,
@@ -171,34 +130,9 @@
     <div class="lab-card">
       <div class="lab-card-img">🧠</div>
       <div class="lab-card-body">
-        <div class="lab-card-tag">Deep Learning</div>
-        <div class="lab-card-title">Generative Models &amp; Diffusion</div>
+        <div class="lab-card-tag">Generative AI</div>
+        <div class="lab-card-title">Diffusion Models &amp; Generation</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Research Areas ── -->
-<section class="section">
-  <div class="section-header">
-    <h2 class="section-title">RESEARCH</h2>
-    <a class="section-viewall" href="pages/research.html">VIEW ALL &nbsp;→</a>
-  </div>
-  <div class="research-grid">
-    <div class="research-card">
-      <div class="research-icon">👁️</div>
-      <h3>Computer Vision</h3>
-      <p>Object detection, image segmentation, video understanding, and scene recognition using deep neural networks.</p>
-    </div>
-    <div class="research-card">
-      <div class="research-icon">💬</div>
-      <h3>Natural Language Processing</h3>
-      <p>Large language models, question answering, text generation, and knowledge graph reasoning.</p>
-    </div>
-    <div class="research-card">
-      <div class="research-icon">🌐</div>
-      <h3>Multimodal Learning</h3>
-      <p>Vision-language models, cross-modal retrieval, image captioning, and visual question answering.</p>
     </div>
   </div>
 </section>
@@ -228,20 +162,13 @@
       <span class="pub-badge">NeurIPS 2025</span>
       <div class="pub-info">
         <h4>DualFusion: Bridging Modality Gap in Multimodal Contrastive Learning</h4>
-        <p>최재원, 김도현, 박준호 · NeurIPS 2025</p>
-      </div>
-    </div>
-    <div class="pub-item">
-      <span class="pub-badge">ICLR 2025</span>
-      <div class="pub-info">
-        <h4>Efficient Token Pruning for Large Vision-Language Models</h4>
-        <p>한수진, 오민재 · ICLR 2025</p>
+        <p>최재원, 김도현 · NeurIPS 2025</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── Members Spotlight ── -->
+<!-- ── Members ── -->
 <section class="section" style="margin-bottom:0">
   <div class="section-header">
     <h2 class="section-title">MEMBERS</h2>
@@ -281,7 +208,6 @@
   </div>
 </section>
 
-<!-- ── Footer ── -->
 <footer>
   <div class="footer-inner">
     <div>
@@ -293,13 +219,12 @@
       </p>
     </div>
     <div class="footer-links">
-      <a href="pages/research.html">Research</a>
-      <a href="pages/members.html">Members</a>
+      <a href="pages/introduction.html">About Us</a>
+      <a href="pages/fields.html">Research</a>
       <a href="pages/publications.html">Publications</a>
-      <a href="pages/project.html">Project</a>
-      <a href="pages/seminar.html">Seminar</a>
-      <a href="pages/news.html">News</a>
-      <a href="pages/contact.html">Contact</a>
+      <a href="pages/members.html">Members</a>
+      <a href="pages/demos-nlp.html">Demos</a>
+      <a href="pages/boards.html">Boards</a>
     </div>
   </div>
   <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photos — IIS Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
+    .page-hero h1 { font-size: 36px; font-weight: 700; }
+    .page-hero h1 span { color: var(--green); }
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 6px 18px; border-radius: 20px; border: 1.5px solid var(--border);
+      background: var(--white); font-size: 13px; font-weight: 500; cursor: pointer;
+      transition: all 0.15s; color: var(--text-muted);
+    }
+    .filter-btn.active, .filter-btn:hover { border-color: var(--green); color: var(--green); background: #e8f4ea; }
+
+    .photo-group { margin-bottom: 44px; }
+    .photo-group-title {
+      font-size: 18px; font-weight: 700; margin-bottom: 16px;
+      padding-left: 14px; border-left: 4px solid var(--green);
+    }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .photo-card {
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--white);
+    }
+    .photo-card:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+    .photo-thumb {
+      width: 100%; height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 56px;
+    }
+    .photo-caption { padding: 10px 14px; font-size: 13px; color: var(--text-muted); }
+
+    /* Lightbox */
+    .lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      z-index: 1000; align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { max-width: 800px; width: 90%; text-align: center; }
+    .lightbox-img {
+      width: 100%; height: 420px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 100px; background: rgba(255,255,255,0.05);
+    }
+    .lightbox-caption { color: #fff; margin-top: 12px; font-size: 15px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 28px; color: #fff;
+      font-size: 32px; cursor: pointer; background: none; border: none;
+    }
+  </style>
+</head>
+<body>
+<script>window.NAV_ROOT = '../';</script>
+<script src="../js/nav.js"></script>
+
+<div class="page-hero">
+  <h1><span>P</span>hotos</h1>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">IIS Lab의 소중한 순간들을 담았습니다</p>
+</div>
+
+<div class="section" style="margin-bottom:60px">
+  <div class="filter-bar">
+    <button class="filter-btn active">전체</button>
+    <button class="filter-btn">행사</button>
+    <button class="filter-btn">학회</button>
+    <button class="filter-btn">MT</button>
+    <button class="filter-btn">일상</button>
+  </div>
+
+  <div class="photo-group">
+    <div class="photo-group-title">2026</div>
+    <div class="photo-grid">
+      <div class="photo-card" onclick="openLightbox('🏔️','CVPR 2026 — Denver, Colorado')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#d4e8d8,#b8d4be)">🏔️</div>
+        <div class="photo-caption">CVPR 2026 · Denver</div>
+      </div>
+      <div class="photo-card" onclick="openLightbox('🎓','2026 학위수여식')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#d8e4f0,#b8cce0)">🎓</div>
+        <div class="photo-caption">2026 학위수여식</div>
+      </div>
+      <div class="photo-card" onclick="openLightbox('🌸','2026 봄 MT')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#f0d8e8,#e0b8d0)">🌸</div>
+        <div class="photo-caption">2026 봄 MT</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo-group">
+    <div class="photo-group-title">2025</div>
+    <div class="photo-grid">
+      <div class="photo-card" onclick="openLightbox('🏆','NeurIPS 2025 — Best Paper Award')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#f0e8d4,#e0d0b8)">🏆</div>
+        <div class="photo-caption">NeurIPS 2025 · Best Paper</div>
+      </div>
+      <div class="photo-card" onclick="openLightbox('🍂','2025 가을 MT')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#e8d4c8,#d0b8a8)">🍂</div>
+        <div class="photo-caption">2025 가을 MT</div>
+      </div>
+      <div class="photo-card" onclick="openLightbox('🎉','2025 연말 파티')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#e8d8f0,#d0b8e0)">🎉</div>
+        <div class="photo-caption">2025 연말 파티</div>
+      </div>
+      <div class="photo-card" onclick="openLightbox('✈️','ICLR 2025 — Singapore')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#d8f0e8,#b8e0d0)">✈️</div>
+        <div class="photo-caption">ICLR 2025 · Singapore</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo-group">
+    <div class="photo-group-title">2024</div>
+    <div class="photo-grid">
+      <div class="photo-card" onclick="openLightbox('🔬','연구실 오픈 데이')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#d4e8d8,#b8d4be)">🔬</div>
+        <div class="photo-caption">연구실 오픈 데이</div>
+      </div>
+      <div class="photo-card" onclick="openLightbox('🎊','신입생 환영회')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#f0d8d8,#e0b8b8)">🎊</div>
+        <div class="photo-caption">신입생 환영회</div>
+      </div>
+      <div class="photo-card" onclick="openLightbox('🏖️','2024 여름 MT')">
+        <div class="photo-thumb" style="background:linear-gradient(135deg,#d8e8f0,#b8d0e0)">🏖️</div>
+        <div class="photo-caption">2024 여름 MT</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <div class="lightbox-img" id="lb-img"></div>
+    <div class="lightbox-caption" id="lb-cap"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">iis<span>Lab</span></div>
+      <p class="footer-desc">Information &amp; Intelligence System Laboratory<br />성균관대학교 소프트웨어융합대학</p>
+    </div>
+    <div class="footer-links">
+      <a href="introduction.html">About Us</a><a href="fields.html">Research</a>
+      <a href="publications.html">Publications</a><a href="members.html">Members</a>
+      <a href="demos-nlp.html">Demos</a><a href="boards.html">Boards</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  function openLightbox(emoji, caption) {
+    document.getElementById('lb-img').textContent = emoji;
+    document.getElementById('lb-cap').textContent = caption;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+</script>
+</body>
+</html>

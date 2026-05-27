@@ -12,72 +12,47 @@
     .page-hero h1 { font-size: 36px; font-weight: 700; }
     .page-hero h1 span { color: var(--green); }
     .year-group { margin-bottom: 44px; }
-    .year-label {
-      font-size: 28px; font-weight: 700; color: var(--green); margin-bottom: 16px;
-      border-bottom: 2px solid var(--border); padding-bottom: 10px;
-    }
+    .year-label { font-size: 28px; font-weight: 700; color: var(--green); margin-bottom: 16px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
     .pub-entry {
       background: var(--white); border-radius: 8px; padding: 22px 24px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 14px;
-      display: flex; gap: 16px; align-items: flex-start;
-      transition: box-shadow 0.2s;
+      display: flex; gap: 16px; align-items: flex-start; transition: box-shadow 0.2s;
     }
     .pub-entry:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.09); }
-    .pub-venue {
-      flex-shrink: 0; background: var(--green); color: var(--white);
-      font-size: 11px; font-weight: 700; padding: 4px 10px;
-      border-radius: 4px; letter-spacing: 0.04em; margin-top: 2px;
-    }
+    .pub-venue { flex-shrink: 0; background: var(--green); color: var(--white); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.04em; margin-top: 2px; text-align: center; min-width: 70px; }
     .pub-venue.oral { background: #b8453a; }
-    .pub-venue.spotlight { background: #7a4ab8; }
     .pub-title { font-size: 15px; font-weight: 600; line-height: 1.45; margin-bottom: 5px; }
     .pub-authors { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
-    .pub-actions { display: flex; gap: 8px; }
-    .pub-link {
-      font-size: 12px; font-weight: 500; color: var(--text-muted);
-      border: 1px solid var(--border); padding: 3px 10px; border-radius: 4px;
-      transition: all 0.15s;
-    }
+    .pub-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pub-link { font-size: 12px; font-weight: 500; color: var(--text-muted); border: 1px solid var(--border); padding: 3px 10px; border-radius: 4px; transition: all 0.15s; }
     .pub-link:hover { color: var(--green); border-color: var(--green); }
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+    .filter-btn { padding: 6px 16px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--white); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; color: var(--text-muted); }
+    .filter-btn.active, .filter-btn:hover { border-color: var(--green); color: var(--green); background: #e8f4ea; }
   </style>
 </head>
 <body>
-
-<nav class="navbar">
-  <div class="nav-inner">
-    <a class="nav-logo" href="../index.html">
-      <svg class="logo-icon" viewBox="0 0 38 38" fill="none"><rect width="38" height="38" rx="6" fill="#e8f4ea"/><path d="M19 7L6 17v15h9v-9h8v9h9V17L19 7z" fill="#3a7d44"/><rect x="15" y="22" width="8" height="10" rx="1" fill="#2d6035"/></svg>
-      <span class="logo-text">iis<span>Lab</span></span>
-    </a>
-    <ul class="nav-menu">
-      <li><a href="research.html">Research</a></li>
-      <li><a href="members.html">Members</a></li>
-      <li><a href="publications.html" class="active">Publications</a></li>
-      <li><a href="project.html">Project</a></li>
-      <li><a href="seminar.html">Seminar</a></li>
-      <li><a href="news.html">News</a></li>
-    </ul>
-    <div class="nav-actions">
-      <a class="btn-nas" href="#">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        NAS
-      </a>
-      <a class="btn-contact" href="contact.html">Contact Us</a>
-    </div>
-  </div>
-</nav>
+<script>window.NAV_ROOT = '../';</script>
+<script src="../js/nav.js"></script>
 
 <div class="page-hero">
   <h1><span>P</span>ublications</h1>
   <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">IIS Lab의 연구 성과를 확인하세요 (* = equal contribution)</p>
 </div>
 
-<div class="section">
+<div class="section" style="margin-bottom:60px">
+  <div class="filter-bar">
+    <button class="filter-btn active">전체</button>
+    <button class="filter-btn">Computer Vision</button>
+    <button class="filter-btn">NLP</button>
+    <button class="filter-btn">Multimodal</button>
+    <button class="filter-btn">Generative AI</button>
+  </div>
 
   <div class="year-group">
     <div class="year-label">2026</div>
     <div class="pub-entry">
-      <span class="pub-venue">CVPR</span>
+      <span class="pub-venue">CVPR<br/>2026</span>
       <div>
         <div class="pub-title">G-MIXER: Geometry-aware Graph Mixer for 3D Scene Understanding</div>
         <div class="pub-authors">임지영*, 양희재* · CVPR 2026, Denver</div>
@@ -89,7 +64,7 @@
       </div>
     </div>
     <div class="pub-entry">
-      <span class="pub-venue">CVPR</span>
+      <span class="pub-venue">CVPR<br/>2026</span>
       <div>
         <div class="pub-title">AdaptVLM: Efficient Adaptation of Vision-Language Models for Dense Prediction</div>
         <div class="pub-authors">박민준, 이서연 · CVPR 2026, Denver</div>
@@ -100,7 +75,7 @@
       </div>
     </div>
     <div class="pub-entry">
-      <span class="pub-venue">CVPR</span>
+      <span class="pub-venue">CVPR<br/>2026</span>
       <div>
         <div class="pub-title">TokenFlow++: Unified Video Editing via Token Propagation</div>
         <div class="pub-authors">최재원, 한수진 · CVPR 2026, Denver</div>
@@ -127,7 +102,7 @@
       </div>
     </div>
     <div class="pub-entry">
-      <span class="pub-venue">ICLR</span>
+      <span class="pub-venue">ICLR<br/>2025</span>
       <div>
         <div class="pub-title">Efficient Token Pruning for Large Vision-Language Models</div>
         <div class="pub-authors">한수진, 오민재 · ICLR 2025, Singapore</div>
@@ -138,7 +113,7 @@
       </div>
     </div>
     <div class="pub-entry">
-      <span class="pub-venue">ICML</span>
+      <span class="pub-venue">ICML<br/>2025</span>
       <div>
         <div class="pub-title">Scaling Laws for Multimodal Foundation Models</div>
         <div class="pub-authors">이서연, 박민준 · ICML 2025, Vienna</div>
@@ -158,12 +133,21 @@
       <p class="footer-desc">Information &amp; Intelligence System Laboratory<br />성균관대학교 소프트웨어융합대학</p>
     </div>
     <div class="footer-links">
-      <a href="research.html">Research</a><a href="members.html">Members</a>
-      <a href="publications.html">Publications</a><a href="news.html">News</a>
-      <a href="contact.html">Contact</a>
+      <a href="introduction.html">About Us</a><a href="fields.html">Research</a>
+      <a href="publications.html">Publications</a><a href="members.html">Members</a>
+      <a href="demos-nlp.html">Demos</a><a href="boards.html">Boards</a>
     </div>
   </div>
   <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>
 </footer>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
