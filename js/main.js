@@ -41,6 +41,35 @@
   startTimer();
 })();
 
+// ── Notice Image Banner ──
+(function () {
+  const slides = document.querySelectorAll('.notice-banner-slide');
+  const dots = document.querySelectorAll('.notice-banner-dot');
+  if (!slides.length) return;
+
+  let current = 0;
+  let timer;
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 4000);
+  }
+
+  document.querySelector('.notice-banner-btn.next')?.addEventListener('click', () => { goTo(current + 1); startTimer(); });
+  document.querySelector('.notice-banner-btn.prev')?.addEventListener('click', () => { goTo(current - 1); startTimer(); });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); startTimer(); }));
+
+  startTimer();
+})();
+
 // ── Active nav link ──
 (function () {
   const links = document.querySelectorAll('.nav-menu a');
