@@ -67,7 +67,7 @@
   }
 
   function goTo(i) {
-    current = Math.max(0, Math.min(i, max));
+    current = ((i % (max + 1)) + (max + 1)) % (max + 1);
     track.style.transform = `translateX(-${current * cardStep()}px)`;
     dots().forEach((d, j) => d.classList.toggle('active', j === current));
   }
