@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — IIS Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
+    .page-hero h1 { font-size: 36px; font-weight: 700; }
+    .page-hero h1 span { color: var(--green); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .contact-card {
+      background: var(--white); border-radius: 10px; padding: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .contact-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--green); }
+    .info-row { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+    .info-row .icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .info-row .label { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+    .info-row .value { font-size: 14px; font-weight: 500; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-muted); }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 6px;
+      font-size: 14px; font-family: inherit; background: var(--bg); color: var(--text);
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--green);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .submit-btn {
+      width: 100%; padding: 12px; background: var(--green); color: var(--white);
+      border: none; border-radius: 6px; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .submit-btn:hover { background: var(--green-dark); }
+    .map-placeholder {
+      background: linear-gradient(135deg, #d4e8d8, #b8d4be); border-radius: 10px;
+      height: 280px; display: flex; align-items: center; justify-content: center;
+      font-size: 64px; margin-top: 28px;
+    }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../index.html">
+      <svg class="logo-icon" viewBox="0 0 38 38" fill="none"><rect width="38" height="38" rx="6" fill="#e8f4ea"/><path d="M19 7L6 17v15h9v-9h8v9h9V17L19 7z" fill="#3a7d44"/><rect x="15" y="22" width="8" height="10" rx="1" fill="#2d6035"/></svg>
+      <span class="logo-text">iis<span>Lab</span></span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="research.html">Research</a></li>
+      <li><a href="members.html">Members</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="project.html">Project</a></li>
+      <li><a href="seminar.html">Seminar</a></li>
+      <li><a href="news.html">News</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn-nas" href="#">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        NAS
+      </a>
+      <a class="btn-contact active" href="contact.html">Contact Us</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1><span>C</span>ontact</h1>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">연구실에 궁금한 점이 있으시면 언제든지 연락해 주세요</p>
+</div>
+
+<div class="section" style="margin-bottom:60px">
+  <div class="contact-grid">
+    <!-- Info -->
+    <div class="contact-card">
+      <h3>연락처 정보</h3>
+      <div class="info-row">
+        <span class="icon">📍</span>
+        <div>
+          <div class="label">주소</div>
+          <div class="value">경기도 수원시 장안구 서부로 2066<br />성균관대학교 소프트웨어융합대학 N동 XXX호</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="icon">📧</span>
+        <div>
+          <div class="label">이메일</div>
+          <div class="value">professor@skku.edu</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="icon">📞</span>
+        <div>
+          <div class="label">전화</div>
+          <div class="value">031-290-XXXX</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="icon">🎓</span>
+        <div>
+          <div class="label">대학원 지원 문의</div>
+          <div class="value">
+            컴퓨터 비전, NLP, 멀티모달 AI에 관심 있는<br />
+            석·박사 과정 지원자를 환영합니다.<br />
+            <a href="mailto:professor@skku.edu" style="color:var(--green);font-weight:600;">이메일로 CV를 보내주세요</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="contact-card">
+      <h3>메시지 보내기</h3>
+      <form onsubmit="event.preventDefault(); alert('메시지가 전송되었습니다!');">
+        <div class="form-group">
+          <label>이름</label>
+          <input type="text" placeholder="홍길동" required />
+        </div>
+        <div class="form-group">
+          <label>이메일</label>
+          <input type="email" placeholder="email@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>문의 유형</label>
+          <select>
+            <option>대학원 입학 문의</option>
+            <option>연구 협력</option>
+            <option>기타</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>메시지</label>
+          <textarea placeholder="문의 내용을 입력해 주세요"></textarea>
+        </div>
+        <button class="submit-btn" type="submit">전송하기</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="map-placeholder">🗺️</div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">iis<span>Lab</span></div>
+      <p class="footer-desc">Information &amp; Intelligence System Laboratory<br />성균관대학교 소프트웨어융합대학</p>
+    </div>
+    <div class="footer-links">
+      <a href="research.html">Research</a><a href="members.html">Members</a>
+      <a href="publications.html">Publications</a><a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>
+</footer>
+</body>
+</html>
