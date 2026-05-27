@@ -75,9 +75,6 @@
   const html = `
     <nav class="navbar" id="main-navbar">
       <div class="nav-inner">
-        <a class="nav-logo" href="${ROOT}index.html">
-          <img class="logo-icon" src="${ROOT}assets/img/favicon.ico" alt="NLP Lab Logo" />
-        </a>
         <ul class="nav-menu">
           ${NAV.map(buildItem).join('')}
         </ul>

@@ -204,8 +204,23 @@ img { max-width: 100%; display: block; }
 /* ── Hero / Title ── */
 .hero {
   background: var(--bg);
-  text-align: center;
   padding: 52px 24px 0;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.hero-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .hero-university {
