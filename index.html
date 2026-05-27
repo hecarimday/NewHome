@@ -10,6 +10,29 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+
+<!-- ── Notice Popup ── -->
+<div id="notice-overlay" class="notice-overlay">
+  <div class="notice-popup">
+    <div class="notice-header">
+      <span class="notice-badge">공지사항</span>
+      <button class="notice-close" id="notice-close" aria-label="닫기">&times;</button>
+    </div>
+    <div class="notice-body">
+      <h2 class="notice-title">2026년 신입 대학원생 모집 안내</h2>
+      <p class="notice-date">2026. 05. 27</p>
+      <p class="notice-text">
+        SKKU NLP Lab에서 2026년 하반기 함께할 석·박사 대학원생을 모집합니다.<br><br>
+        자연어처리, 대규모 언어모델(LLM), 멀티모달 AI 등에 관심 있는 분들의 많은 지원 바랍니다.<br><br>
+        지원 문의: <strong>lab@skku.edu</strong>
+      </p>
+    </div>
+    <div class="notice-footer">
+      <button class="notice-btn-close" id="notice-btn-close">닫기</button>
+    </div>
+  </div>
+</div>
+
 <script>window.NAV_ROOT = '';</script>
 <script src="js/nav.js"></script>
 
@@ -219,18 +242,21 @@
         경기도 수원시 장안구 서부로 2066
       </p>
     </div>
-    <div class="footer-links">
-      <a href="pages/introduction.html">About Us</a>
-      <a href="pages/fields.html">Research</a>
-      <a href="pages/publications.html">Publications</a>
-      <a href="pages/members.html">Members</a>
-      <a href="pages/demos-nlp.html">Demos</a>
-      <a href="pages/boards.html">Boards</a>
-    </div>
   </div>
   <p class="footer-copy">© 2026 IIS Lab, Sungkyunkwan University. All rights reserved.</p>
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+  (function () {
+    var overlay = document.getElementById('notice-overlay');
+    function closeNotice() { overlay.classList.add('hidden'); }
+    document.getElementById('notice-close').addEventListener('click', closeNotice);
+    document.getElementById('notice-btn-close').addEventListener('click', closeNotice);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeNotice();
+    });
+  })();
+</script>
 </body>
 </html>
