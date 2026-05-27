@@ -99,6 +99,61 @@ img { max-width: 100%; display: block; }
 .nav-item > a:hover,
 .nav-item.active > a { background: rgba(255,255,255,0.12); color: #fff; }
 
+/* ── Dropdown ── */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--white);
+  border-radius: 0 0 8px 8px;
+  min-width: 170px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+  z-index: 300;
+  overflow: hidden;
+}
+
+.nav-item:hover .dropdown { display: block; }
+
+.dropdown a {
+  display: block;
+  padding: 11px 18px;
+  font-size: 14px;
+  color: var(--text);
+  border-bottom: 1px solid #f4f4f0;
+  transition: background 0.12s, color 0.12s, padding-left 0.12s;
+}
+.dropdown a:last-child { border-bottom: none; }
+.dropdown a:hover { background: #edf7f0; color: var(--green); padding-left: 22px; }
+
+.nav-item > a .caret {
+  font-size: 9px;
+  opacity: 0.7;
+  margin-left: 2px;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.nav-item:hover > a .caret { transform: rotate(180deg); }
+
+/* ── Contact Us button ── */
+.btn-contact {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 16px;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.92);
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn-contact:hover {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  border-color: #fff;
+}
+
 /* ── Section sub-nav (within each section page) ── */
 .sub-nav {
   display: flex;
