@@ -58,6 +58,7 @@ img { max-width: 100%; display: block; }
 .nav-logo .logo-icon {
   width: 34px;
   height: 34px;
+  object-fit: contain;
 }
 
 .nav-logo .logo-text {

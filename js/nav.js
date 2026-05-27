@@ -72,30 +72,23 @@
     </li>`;
   }
 
-  const logoSVG = `
-    <svg class="logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="38" height="38" rx="6" fill="rgba(255,255,255,0.15)"/>
-      <path d="M19 7L6 17v15h9v-9h8v9h9V17L19 7z" fill="#7dd49a"/>
-      <rect x="15" y="22" width="8" height="10" rx="1" fill="#4ab870"/>
-    </svg>`;
-
   const html = `
     <nav class="navbar" id="main-navbar">
       <div class="nav-inner">
         <a class="nav-logo" href="${ROOT}index.html">
-          ${logoSVG}
+          <img class="logo-icon" src="${ROOT}assets/img/연구실 로고/nlp_logo3.png" alt="NLP Lab Logo" />
           <span class="logo-text">iis<span>Lab</span></span>
         </a>
         <ul class="nav-menu">
           ${NAV.map(buildItem).join('')}
         </ul>
         <div class="nav-actions">
+          <a class="btn-contact" href="${P}contact.html">Contact Us</a>
           <button class="nav-icon-btn" aria-label="Search" onclick="alert('검색 기능은 준비 중입니다.')">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
             </svg>
           </button>
-          <a class="btn-contact" href="${P}contact.html">Contact Us</a>
         </div>
       </div>
     </nav>`;
