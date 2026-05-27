@@ -77,7 +77,6 @@
       <div class="nav-inner">
         <a class="nav-logo" href="${ROOT}index.html">
           <img class="logo-icon" src="${ROOT}assets/img/연구실 로고/nlp_logo3.png" alt="NLP Lab Logo" />
-          <span class="logo-text">iis<span>Lab</span></span>
         </a>
         <ul class="nav-menu">
           ${NAV.map(buildItem).join('')}
