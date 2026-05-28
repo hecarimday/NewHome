@@ -11,6 +11,10 @@
     .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
     .page-hero h1 { font-size: 36px; font-weight: 700; }
     .page-hero h1 span { color: var(--green); }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+    .stat-box { background: var(--white); border-radius: 10px; padding: 24px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .stat-num { font-size: 40px; font-weight: 700; }
+    .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
     .patent-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     .patent-table th {
       background: #0d5225; color: #fff; font-size: 12px; font-weight: 600;
@@ -41,6 +45,12 @@
 </div>
 
 <div class="section" style="margin-bottom:60px">
+
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-num" style="color:#e03030;">19</div><div class="stat-label">특허 등록</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:#2060d0;">24</div><div class="stat-label">특허 출원</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:#e07820;">21</div><div class="stat-label">저작권 등록</div></div>
+  </div>
 
   <table class="patent-table">
     <thead>
