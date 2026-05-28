@@ -11,28 +11,32 @@
     .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
     .page-hero h1 { font-size: 36px; font-weight: 700; }
     .page-hero h1 span { color: var(--green); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-    .contact-card { background: var(--white); border-radius: 10px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .contact-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--green); }
-    .info-row { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
-    .info-row .icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
-    .info-row .label { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
-    .info-row .value { font-size: 14px; font-weight: 500; }
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-muted); }
-    .form-group input, .form-group textarea, .form-group select {
-      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 6px;
-      font-size: 14px; font-family: inherit; background: var(--bg); color: var(--text);
-      transition: border-color 0.15s;
+    .contact-img-wrap { display: block; text-align: center; }
+    .contact-img {
+      width: 100%; max-width: 680px; display: block; margin: 0 auto;
+      border-radius: 10px; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      transition: opacity 0.15s, box-shadow 0.15s;
     }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--green); }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .submit-btn {
-      width: 100%; padding: 12px; background: var(--green); color: var(--white);
-      border: none; border-radius: 6px; font-size: 15px; font-weight: 600;
-      cursor: pointer; transition: background 0.15s;
+    .contact-img:hover { opacity: 0.93; box-shadow: 0 6px 24px rgba(0,0,0,0.15); }
+    .address-section {
+      margin-top: 24px; padding: 28px 32px;
+      background: var(--white); border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      text-align: center;
     }
-    .submit-btn:hover { background: var(--green-dark); }
+    .address-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .address-ko {
+      font-size: 15px; line-height: 1.85; color: var(--text);
+      margin-bottom: 12px;
+    }
+    .address-en {
+      font-size: 13px; line-height: 1.85; color: var(--text-muted);
+    }
     .map-section { margin-top: 28px; }
     .map-section-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -60,7 +64,7 @@
     }
     .map-address-bar strong { color: var(--text); }
     @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; }
+      .address-section { padding: 20px 18px; }
       #kakao-map { height: 260px; }
     }
   </style>
@@ -83,73 +87,23 @@
 </div>
 
 <div class="section" style="margin-bottom:60px">
-  <div class="contact-grid">
-    <div class="contact-card">
-      <h3>연락처 정보</h3>
-      <div class="info-row">
-        <span class="icon">📍</span>
-        <div>
-          <div class="label">주소</div>
-          <div class="value">경기도 수원시 장안구 서부로 2066<br />성균관대학교 자연과학캠퍼스 N센터 4층 86401호</div>
-        </div>
-      </div>
-      <div class="info-row">
-        <span class="icon">📧</span>
-        <div>
-          <div class="label">이메일</div>
-          <div class="value"><a href="mailto:professor@skku.edu" style="color:var(--green)">professor@skku.edu</a></div>
-        </div>
-      </div>
-      <div class="info-row">
-        <span class="icon">📞</span>
-        <div>
-          <div class="label">전화</div>
-          <div class="value">031-290-XXXX</div>
-        </div>
-      </div>
-      <div class="info-row">
-        <span class="icon">🎓</span>
-        <div>
-          <div class="label">대학원 지원</div>
-          <div class="value">
-            CV를 첨부하여 이메일로 보내주세요.<br />
-            컴퓨터 비전, NLP, 멀티모달 AI에 관심 있는 분 환영합니다.
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="contact-card">
-      <h3>메시지 보내기</h3>
-      <form onsubmit="event.preventDefault(); alert('메시지가 전송되었습니다! 빠른 시일 내에 답변드리겠습니다.');">
-        <div class="form-group">
-          <label>이름</label>
-          <input type="text" placeholder="홍길동" required />
-        </div>
-        <div class="form-group">
-          <label>이메일</label>
-          <input type="email" placeholder="email@example.com" required />
-        </div>
-        <div class="form-group">
-          <label>소속</label>
-          <input type="text" placeholder="학교 / 회사 / 기관" />
-        </div>
-        <div class="form-group">
-          <label>문의 유형</label>
-          <select>
-            <option>대학원 입학 문의</option>
-            <option>연구 협력</option>
-            <option>산학협력</option>
-            <option>기타</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>메시지</label>
-          <textarea placeholder="문의 내용을 입력해 주세요"></textarea>
-        </div>
-        <button class="submit-btn" type="submit">전송하기</button>
-      </form>
-    </div>
+  <!-- 연구실 문의 이미지 — href를 실제 구글폼 URL로 교체하세요 -->
+  <a class="contact-img-wrap" href="https://docs.google.com/forms/d/e/1FAIpQLScuPJTLfKKVgjACoPYXgIy4V9uczZxrvE9Yd5sem34n0tVW6g/viewform" target="_blank" rel="noopener">
+    <img class="contact-img" src="../assets/img/notice/contact.png" alt="연구실 문의 및 대학원생 모집 공고" />
+  </a>
+
+  <!-- 주소 -->
+  <div class="address-section">
+    <div class="address-label">찾아오시는 길</div>
+    <p class="address-ko">
+      (16419) 경기도 수원시 장안구 서부로 2066,<br>
+      성균관대학교 (자연과학캠퍼스) N센터 86401호
+    </p>
+    <p class="address-en">
+      N Center 86401, Sungkyunkwan University (Natural Science Campus),<br>
+      (16419) 2066 Seobu-ro, Jang-gu, Suwon-si, Gyeonggi-do, South Korea
+    </p>
   </div>
   <div class="map-section">
     <div class="map-section-header">

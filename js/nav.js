@@ -102,7 +102,7 @@
           ${NAV.map(buildItem).join('')}
         </ul>
         <div class="nav-actions">
-          <a class="btn-contact" href="${P}contact.html">Contact Us</a>
+          <a class="btn-contact" href="${P}https://docs.google.com/forms/d/e/1FAIpQLScuPJTLfKKVgjACoPYXgIy4V9uczZxrvE9Yd5sem34n0tVW6g/viewform">Contact Us</a>
           <button class="nav-icon-btn" aria-label="Search" onclick="alert('검색 기능은 준비 중입니다.')">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
