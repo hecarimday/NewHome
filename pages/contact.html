@@ -33,12 +33,36 @@
       cursor: pointer; transition: background 0.15s;
     }
     .submit-btn:hover { background: var(--green-dark); }
-    .map-placeholder {
-      background: linear-gradient(135deg, #d4e8d8, #b8d4be); border-radius: 10px;
-      height: 260px; display: flex; align-items: center; justify-content: center;
-      font-size: 64px; margin-top: 28px;
+    .map-section { margin-top: 28px; }
+    .map-section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
     }
-    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+    .map-section-title { font-size: 16px; font-weight: 700; color: var(--text); }
+    .map-kakao-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 14px; background: #FEE500; color: #3A1D1D;
+      border-radius: 6px; font-size: 13px; font-weight: 700;
+      text-decoration: none; transition: opacity 0.15s;
+    }
+    .map-kakao-link:hover { opacity: 0.85; }
+    #kakao-map {
+      width: 100%; height: 380px; border-radius: 10px;
+      overflow: hidden; border: 1px solid var(--border);
+      background: #e8f0eb;
+    }
+    .map-address-bar {
+      margin-top: 10px; padding: 12px 16px;
+      background: var(--white); border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 13px; color: var(--text-muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .map-address-bar strong { color: var(--text); }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      #kakao-map { height: 260px; }
+    }
   </style>
 </head>
 <body>
@@ -66,7 +90,7 @@
         <span class="icon">📍</span>
         <div>
           <div class="label">주소</div>
-          <div class="value">경기도 수원시 장안구 서부로 2066<br />성균관대학교 소프트웨어융합대학 N동 XXX호</div>
+          <div class="value">경기도 수원시 장안구 서부로 2066<br />성균관대학교 자연과학캠퍼스 N센터 4층 86401호</div>
         </div>
       </div>
       <div class="info-row">
@@ -127,17 +151,73 @@
       </form>
     </div>
   </div>
-  <div class="map-placeholder">🗺️</div>
+  <div class="map-section">
+    <div class="map-section-header">
+      <span class="map-section-title">📍 오시는 길</span>
+      <a class="map-kakao-link"
+         href="https://map.kakao.com/link/to/성균관대학교 자연과학캠퍼스 N센터,37.29971,127.03528"
+         target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        카카오맵에서 보기
+      </a>
+    </div>
+    <div id="kakao-map"></div>
+    <div class="map-address-bar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;color:var(--green)">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span><strong>성균관대학교 자연과학캠퍼스 N센터 4층 86401호</strong> &nbsp;|&nbsp; 경기도 수원시 장안구 서부로 2066</span>
+    </div>
+  </div>
 </div>
 
 <footer>
   <div class="footer-inner">
     <div>
       <div class="footer-logo">NLP<span>LAP</span></div>
-      <p class="footer-desc">Natural Language Processing Laboratory<br />성균관대학교 소프트웨어융합대학</p>
+      <p class="footer-desc">Natural Language Processing Laboratory<br />성균관대학교 자연과학캠퍼스</p>
     </div>
   </div>
   <p class="footer-copy">© 2026 NLPLAP, Sungkyunkwan University. All rights reserved.</p>
 </footer>
+
+<!-- 카카오맵 API: https://developers.kakao.com 에서 앱키 발급 후 YOUR_KAKAO_APP_KEY 교체 -->
+<script type="text/javascript"
+  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_KAKAO_APP_KEY&libraries=services&autoload=false">
+</script>
+<script>
+(function () {
+  var LAT = 37.29971, LNG = 127.03528;
+  var ADDR = '경기도 수원시 장안구 서부로 2066';
+  var LABEL = '<div style="padding:8px 14px;font-size:13px;line-height:1.5;white-space:nowrap;background:#fff;border:1.5px solid #0d5225;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);"><strong style="color:#0d5225;">NLPLAB</strong><br/><span style="color:#555;font-size:12px;">N센터 4층 86401호</span></div>';
+
+  function initMap(lat, lng) {
+    var container = document.getElementById('kakao-map');
+    var map = new kakao.maps.Map(container, {
+      center: new kakao.maps.LatLng(lat, lng),
+      level: 4
+    });
+    var marker = new kakao.maps.Marker({
+      map: map,
+      position: new kakao.maps.LatLng(lat, lng)
+    });
+    var infowindow = new kakao.maps.InfoWindow({ content: LABEL, removable: false });
+    infowindow.open(map, marker);
+  }
+
+  kakao.maps.load(function () {
+    var geocoder = new kakao.maps.services.Geocoder();
+    geocoder.addressSearch(ADDR, function (result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        initMap(parseFloat(result[0].y), parseFloat(result[0].x));
+      } else {
+        initMap(LAT, LNG);
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
