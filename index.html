@@ -52,6 +52,7 @@
       </p>
     </div>
     <div class="notice-footer">
+      <button class="notice-btn-today" id="notice-btn-today">오늘 하루 안보기</button>
       <button class="notice-btn-close" id="notice-btn-close">닫기</button>
     </div>
   </div>
@@ -268,9 +269,21 @@
 <script>
   (function () {
     var overlay = document.getElementById('notice-overlay');
+    var today = new Date().toISOString().slice(0, 10);
+
+    if (localStorage.getItem('noticeHideUntil') === today) {
+      overlay.classList.add('hidden');
+    }
+
     function closeNotice() { overlay.classList.add('hidden'); }
+    function hideForToday() {
+      localStorage.setItem('noticeHideUntil', today);
+      overlay.classList.add('hidden');
+    }
+
     document.getElementById('notice-close').addEventListener('click', closeNotice);
     document.getElementById('notice-btn-close').addEventListener('click', closeNotice);
+    document.getElementById('notice-btn-today').addEventListener('click', hideForToday);
     overlay.addEventListener('click', function (e) {
       if (e.target === overlay) closeNotice();
     });
