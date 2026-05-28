@@ -12,20 +12,21 @@
     .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
     .page-hero h1 { font-size: 36px; font-weight: 700; }
     .page-hero h1 span { color: var(--green); }
-    .demo-card { background: var(--white); border-radius: 10px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px; }
-    .demo-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-    .demo-card .desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
-    .input-row { display: flex; gap: 12px; align-items: flex-end; }
-    .input-row input { flex: 1; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; }
-    .input-row input:focus { outline: none; border-color: var(--green); }
-    .run-btn { padding: 11px 24px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
-    .run-btn:hover { background: var(--green-dark); }
-    .canvas-wrap { margin-top: 20px; text-align: center; }
-    canvas { border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); max-width: 100%; }
-    .style-btns { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-    .style-btn { padding: 6px 16px; border-radius: 20px; border: 1.5px solid var(--border); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; background: var(--white); }
-    .style-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
-    .loading { display: none; color: var(--text-muted); font-size: 14px; margin-top: 12px; }
+    .demo-item { background: var(--white); border-radius: 10px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); overflow: hidden; }
+    .demo-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; background: none; border: none; cursor: pointer; text-align: left; gap: 16px; font-family: inherit; transition: background 0.15s; }
+    .demo-toggle:hover { background: var(--bg); }
+    .demo-toggle-title { font-size: 15px; font-weight: 600; line-height: 1.5; color: var(--text); }
+    .demo-arrow { font-size: 12px; color: var(--text-muted); flex-shrink: 0; transition: transform 0.2s; }
+    .demo-toggle.open .demo-arrow { transform: rotate(180deg); }
+    .demo-content { display: none; padding: 0 24px 24px; border-top: 1px solid var(--border); }
+    .demo-content.open { display: block; }
+    .demo-meta { margin-top: 16px; margin-bottom: 16px; }
+    .demo-meta p { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; line-height: 1.6; }
+    .demo-meta a { color: var(--green); text-decoration: none; }
+    .demo-meta a:hover { text-decoration: underline; }
+    .demo-meta b { color: var(--text); }
+    .demo-video { width: 100%; border-radius: 8px; margin-top: 8px; max-height: 480px; }
+    .demo-video-label { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
   </style>
 </head>
 <body>
@@ -34,7 +35,7 @@
 
 <div class="page-hero">
   <h1><span>G</span>enerative AI Demos</h1>
-  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Generative AI 데모를 체험해 보세요</p>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Generative AI 데모 동영상</p>
 </div>
 
 <div class="section" style="margin-top:24px;margin-bottom:0;padding-bottom:0">
@@ -47,62 +48,81 @@
 </div>
 
 <div class="section" style="margin-bottom:60px">
-  <!-- Text-to-Image -->
-  <div class="demo-card">
-    <h3>🎨 텍스트-이미지 생성 (Text-to-Image)</h3>
-    <p class="desc">텍스트 프롬프트를 입력하면 AI가 이미지를 생성합니다. (시뮬레이션 데모 — 캔버스 생성형 패턴)</p>
-    <div class="style-btns" id="style-btns">
-      <button class="style-btn active" onclick="setStyle(this,'realistic')">사실적</button>
-      <button class="style-btn" onclick="setStyle(this,'anime')">애니메이션</button>
-      <button class="style-btn" onclick="setStyle(this,'abstract')">추상화</button>
-      <button class="style-btn" onclick="setStyle(this,'sketch')">스케치</button>
-    </div>
-    <div class="input-row">
-      <input id="t2i-prompt" type="text" placeholder="예) 봄날의 벚꽃이 피어있는 강가, 4K, 사실적" />
-      <button class="run-btn" onclick="generateImage()">생성하기</button>
-    </div>
-    <div class="loading" id="gen-loading">⏳ 이미지 생성 중...</div>
-    <div class="canvas-wrap">
-      <canvas id="gen-canvas" width="512" height="320" style="display:none"></canvas>
-      <p id="gen-caption" style="font-size:12px;color:var(--text-muted);margin-top:8px;display:none"></p>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">오픈 도메인 질의응답 시스템을 위한 질의 기반 다중 문서 요약과 설명 가능한 근거 문장 생성</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Generating Question-Based Multi-Document Summaries and Explainable Evidence Sentences for Open-Domain Q&amp;A Systems</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_generation_multi_document_summaries_and_evidence.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
   </div>
 
-  <!-- Image Captioning -->
-  <div class="demo-card">
-    <h3>📝 이미지 캡셔닝 (Image Captioning)</h3>
-    <p class="desc">이미지를 업로드하면 AI가 자동으로 설명을 생성합니다.</p>
-    <div style="border:2px dashed var(--border);border-radius:8px;padding:32px;text-align:center;cursor:pointer;transition:border-color 0.15s"
-      id="drop-zone" onclick="document.getElementById('img-upload').click()" ondragover="event.preventDefault()" ondrop="handleDrop(event)">
-      <div style="font-size:36px;margin-bottom:8px">🖼️</div>
-      <div style="font-size:14px;color:var(--text-muted)">이미지를 클릭하거나 드래그해서 업로드</div>
-      <div style="font-size:12px;color:var(--text-muted);margin-top:4px">JPG, PNG 지원</div>
-      <input type="file" id="img-upload" accept="image/*" style="display:none" onchange="handleUpload(event)" />
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">지식 그래프의 링크 예측을 위한 거대 언어 모델 기반 관계 설명문 생성 방법</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Generating Relation Descriptions with Large Language Model for Link Prediction</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> <a href="https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE11943975" target="_blank">Publisher Link</a></p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_generation_relation_descriptions.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
-    <div class="result-box2" id="caption-result" style="margin-top:14px;padding:14px;background:#f4f4f0;border-radius:6px;border:1px solid var(--border);display:none"></div>
   </div>
 
-  <!-- Style Transfer -->
-  <div class="demo-card">
-    <h3>🖌️ 스타일 변환 (Style Transfer)</h3>
-    <p class="desc">이미지에 다양한 예술 스타일을 적용하여 변환합니다. (캔버스 필터 시뮬레이션)</p>
-    <div class="style-btns">
-      <button class="style-btn active" id="st-van">반 고흐</button>
-      <button class="style-btn" id="st-monet">모네</button>
-      <button class="style-btn" id="st-picasso">피카소</button>
-      <button class="style-btn" id="st-ink">수묵화</button>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
-      <div>
-        <p style="font-size:12px;color:var(--text-muted);margin-bottom:6px">원본 이미지</p>
-        <canvas id="st-src" width="240" height="180" style="border-radius:6px;width:100%;background:linear-gradient(135deg,#d4e8d8,#b8d4be)"></canvas>
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">질의 집중 의미 그래프를 활용한 질의 기반 문서 요약</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Text Summarization with the Query Attentive Graph-Attention Network</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
       </div>
-      <div>
-        <p style="font-size:12px;color:var(--text-muted);margin-bottom:6px">변환 결과</p>
-        <canvas id="st-dst" width="240" height="180" style="border-radius:6px;width:100%;background:linear-gradient(135deg,#e8d4d8,#d4b8be)"></canvas>
-      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_query_based_summarization.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
-    <button class="run-btn" style="margin-top:14px" onclick="runStyleTransfer()">스타일 적용</button>
+  </div>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">주제 분포를 반영한 교차 주의 기반 대화 요약 시스템</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Dialogue Summarization using Topic distribution-Aware Cross-Attention</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003136965" target="_blank">Publisher Link</a></p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_dialogue_summarization_using_topic_distribution.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </div>
 
 </div>
@@ -118,96 +138,12 @@
 </footer>
 
 <script>
-let currentStyle = 'realistic';
-function setStyle(btn, style) {
-  document.querySelectorAll('#style-btns .style-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  currentStyle = style;
+function toggleDemo(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
 }
-
-function generateImage() {
-  const prompt = document.getElementById('t2i-prompt').value.trim() || 'AI generated image';
-  const loading = document.getElementById('gen-loading');
-  const canvas = document.getElementById('gen-canvas');
-  const cap = document.getElementById('gen-caption');
-  loading.style.display = 'block';
-  canvas.style.display = 'none'; cap.style.display = 'none';
-
-  setTimeout(() => {
-    loading.style.display = 'none';
-    canvas.style.display = 'block'; cap.style.display = 'block';
-    const ctx = canvas.getContext('2d');
-    const palettes = {
-      realistic: [[52,125,68],[30,80,44],[100,180,120],[200,230,210]],
-      anime:     [[220,120,180],[140,60,180],[80,160,220],[255,200,100]],
-      abstract:  [[220,60,60],[60,140,220],[220,180,40],[60,200,120]],
-      sketch:    [[180,180,180],[120,120,120],[80,80,80],[220,220,220]]
-    };
-    const colors = palettes[currentStyle] || palettes.realistic;
-    for (let i = 0; i < 80; i++) {
-      const [r,g,b] = colors[Math.floor(Math.random()*colors.length)];
-      ctx.fillStyle = `rgba(${r},${g},${b},${0.3+Math.random()*0.7})`;
-      const x = Math.random()*512, y = Math.random()*320;
-      const size = 10 + Math.random()*60;
-      ctx.beginPath();
-      if (currentStyle === 'sketch') { ctx.strokeStyle = `rgb(${r},${g},${b})`; ctx.lineWidth = 1; ctx.moveTo(x,y); ctx.lineTo(x+size, y+size*0.5); ctx.stroke(); }
-      else { ctx.ellipse(x, y, size, size*0.6, Math.random()*Math.PI, 0, Math.PI*2); ctx.fill(); }
-    }
-    ctx.fillStyle = 'rgba(255,255,255,0.15)';
-    ctx.font = 'bold 14px Inter';
-    ctx.fillText(`"${prompt.slice(0,40)}"`, 16, 300);
-    cap.textContent = `스타일: ${currentStyle} · 프롬프트: "${prompt}"`;
-  }, 1800);
-}
-
-function handleUpload(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const r = document.getElementById('caption-result');
-  r.style.display = 'block';
-  r.innerHTML = '⏳ 캡션 생성 중...';
-  setTimeout(() => {
-    const captions = [
-      'A researcher working on a laptop with AI visualizations on the screen.',
-      'A modern laboratory setting with computers and research equipment.',
-      'A group of students collaborating on a project in a university environment.',
-    ];
-    r.innerHTML = `<b>🤖 생성된 캡션:</b><br/><br/><em>"${captions[Math.floor(Math.random()*captions.length)]}"</em>
-      <br/><br/><span style="font-size:12px;color:var(--text-muted)">* 실제 모델 API 연동 시 정확한 캡션이 생성됩니다.</span>`;
-  }, 1500);
-}
-function handleDrop(e) { e.preventDefault(); const f = e.dataTransfer.files[0]; if(f) { const inp = document.getElementById('img-upload'); inp.files = e.dataTransfer.files; handleUpload({target: inp}); } }
-
-function runStyleTransfer() {
-  const src = document.getElementById('st-src');
-  const dst = document.getElementById('st-dst');
-  const sCtx = src.getContext('2d');
-  const dCtx = dst.getContext('2d');
-  const styles = [
-    [[200,150,50],[150,100,30]],
-    [[80,130,200],[40,90,160]],
-    [[200,80,80],[160,40,40]],
-    [[60,60,60],[30,30,30]]
-  ];
-  const activeStyle = ['st-van','st-monet','st-picasso','st-ink'].findIndex(id => document.getElementById(id).classList.contains('active'));
-  const [c1, c2] = styles[Math.max(activeStyle,0)];
-  dCtx.clearRect(0,0,240,180);
-  for (let i = 0; i < 60; i++) {
-    const [r,g,b] = Math.random()>0.5 ? c1 : c2;
-    dCtx.fillStyle = `rgba(${r},${g},${b},${0.3+Math.random()*0.6})`;
-    dCtx.beginPath();
-    dCtx.ellipse(Math.random()*240, Math.random()*180, 5+Math.random()*30, 3+Math.random()*20, Math.random()*Math.PI, 0, Math.PI*2);
-    dCtx.fill();
-  }
-}
-
-// Initialize style transfer buttons
-document.querySelectorAll('#st-van,#st-monet,#st-picasso,#st-ink').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#st-van,#st-monet,#st-picasso,#st-ink').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
 </script>
 </body>
 </html>

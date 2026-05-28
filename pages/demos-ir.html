@@ -12,21 +12,21 @@
     .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
     .page-hero h1 { font-size: 36px; font-weight: 700; }
     .page-hero h1 span { color: var(--green); }
-    .search-box-wrap { background: var(--white); border-radius: 10px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px; }
-    .search-row { display: flex; gap: 10px; }
-    .search-input { flex: 1; padding: 12px 16px; border: 2px solid var(--border); border-radius: 8px; font-size: 15px; font-family: inherit; transition: border-color 0.15s; }
-    .search-input:focus { outline: none; border-color: var(--green); }
-    .search-btn { padding: 12px 28px; background: var(--green); color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
-    .search-btn:hover { background: var(--green-dark); }
-    .result-item { background: var(--white); border-radius: 8px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 4px solid var(--green); }
-    .result-item h4 { font-size: 16px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
-    .result-item p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-    .result-meta { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
-    .score-bar { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
-    .score-label { font-size: 11px; color: var(--text-muted); width: 80px; }
-    .score-fill { height: 6px; background: var(--green); border-radius: 3px; transition: width 0.5s; }
-    .score-bg { flex: 1; height: 6px; background: #e8e8e8; border-radius: 3px; overflow: hidden; }
-    .hidden { display: none; }
+    .demo-item { background: var(--white); border-radius: 10px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); overflow: hidden; }
+    .demo-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; background: none; border: none; cursor: pointer; text-align: left; gap: 16px; font-family: inherit; transition: background 0.15s; }
+    .demo-toggle:hover { background: var(--bg); }
+    .demo-toggle-title { font-size: 15px; font-weight: 600; line-height: 1.5; color: var(--text); }
+    .demo-arrow { font-size: 12px; color: var(--text-muted); flex-shrink: 0; transition: transform 0.2s; }
+    .demo-toggle.open .demo-arrow { transform: rotate(180deg); }
+    .demo-content { display: none; padding: 0 24px 24px; border-top: 1px solid var(--border); }
+    .demo-content.open { display: block; }
+    .demo-meta { margin-top: 16px; margin-bottom: 16px; }
+    .demo-meta p { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; line-height: 1.6; }
+    .demo-meta a { color: var(--green); text-decoration: none; }
+    .demo-meta a:hover { text-decoration: underline; }
+    .demo-meta b { color: var(--text); }
+    .demo-video { width: 100%; border-radius: 8px; margin-top: 8px; max-height: 480px; }
+    .demo-video-label { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
   </style>
 </head>
 <body>
@@ -35,7 +35,7 @@
 
 <div class="page-hero">
   <h1><span>I</span>R Demos</h1>
-  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Information Retrieval 데모를 체험해 보세요</p>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Information Retrieval 데모 동영상</p>
 </div>
 
 <div class="section" style="margin-top:24px;margin-bottom:0;padding-bottom:0">
@@ -48,24 +48,83 @@
 </div>
 
 <div class="section" style="margin-bottom:60px">
-  <div class="search-box-wrap">
-    <h3 style="font-size:18px;font-weight:700;margin-bottom:6px">논문 의미 검색 (Dense Retrieval Demo)</h3>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:18px">자연어 질의로 IIS Lab 관련 논문을 의미 기반으로 검색합니다.</p>
-    <div class="search-row">
-      <input class="search-input" id="ir-query" type="text" placeholder="예) 3D 장면 이해를 위한 그래프 방법론" />
-      <button class="search-btn" onclick="runSearch()">검색</button>
-    </div>
-    <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">
-      추천 쿼리:
-      <span style="color:var(--green);cursor:pointer;font-weight:500" onclick="setQ('멀티모달 대조 학습')">멀티모달 대조 학습</span> ·
-      <span style="color:var(--green);cursor:pointer;font-weight:500" onclick="setQ('비전 언어 모델 효율화')">비전 언어 모델 효율화</span> ·
-      <span style="color:var(--green);cursor:pointer;font-weight:500" onclick="setQ('토큰 가지치기 방법')">토큰 가지치기</span>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">해석 가능하고 효율적인 정보 검색을 위한 희소 오토인코더 잠재 표현</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Decoding Dense Embeddings: Sparse Autoencoders for Interpreting and Discretizing Dense Retrieval</p>
+        <p><b>Github:</b> <a href="https://github.com/Tro-fish/Decoding-Dense-Embeddings" target="_blank">https://github.com/Tro-fish/Decoding-Dense-Embeddings</a></p>
+        <p><b>Paper:</b> <a href="https://arxiv.org/abs/2506.00041" target="_blank">https://arxiv.org/abs/2506.00041</a></p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_decoding_dense_embeddings.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
   </div>
 
-  <div id="ir-results" class="hidden">
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px" id="result-count"></p>
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">저자원 환경에서 도메인 과적합 문제를 방지하기 위한 문서분류 기법</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Low-resource Text Classification Method that Mitigates Overfitting on Domain-specific Features</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_low-resource_text_classification.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </div>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">사전학습을 이용한 정보검색 시스템</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Information Retrieval with REAP (Retrieval-adaptive Pretraining)</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_information_retriever.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">설명가능성을 위한 토큰 임베딩 기반 동영상 검색</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Explainable Video Search System using Token Space-based Representation</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> <a href="https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE12007528" target="_blank">Publisher Link</a></p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_explainable_question_answering_system.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
 </div>
 
 <footer>
@@ -79,40 +138,11 @@
 </footer>
 
 <script>
-const PAPERS = [
-  { title: 'G-MIXER: Geometry-aware Graph Mixer for 3D Scene Understanding', venue: 'CVPR 2026', authors: '임지영, 양희재', desc: '그래프 기반 지오메트리 인식 믹서를 통해 3D 장면의 구조적 정보를 효과적으로 학습합니다.' },
-  { title: 'AdaptVLM: Efficient Adaptation of Vision-Language Models', venue: 'CVPR 2026', authors: '박민준, 이서연', desc: '비전-언어 모델의 효율적 적응 방법을 제안하여 다양한 다운스트림 태스크에서 성능을 향상합니다.' },
-  { title: 'DualFusion: Bridging Modality Gap in Multimodal Contrastive Learning', venue: 'NeurIPS 2025', authors: '최재원, 김도현', desc: '멀티모달 대조 학습에서 모달리티 간 간격을 이중 융합 방식으로 해소합니다.' },
-  { title: 'Efficient Token Pruning for Large Vision-Language Models', venue: 'ICLR 2025', authors: '한수진, 오민재', desc: '대규모 비전-언어 모델에서 중요도 기반 토큰 가지치기를 통해 추론 효율을 대폭 향상합니다.' },
-  { title: 'Scaling Laws for Multimodal Foundation Models', venue: 'ICML 2025', authors: '이서연, 박민준', desc: '멀티모달 파운데이션 모델의 스케일링 법칙을 체계적으로 분석합니다.' },
-];
-
-function setQ(q) { document.getElementById('ir-query').value = q; runSearch(); }
-
-function runSearch() {
-  const q = document.getElementById('ir-query').value.trim();
-  if (!q) return;
-  const scores = PAPERS.map(p => ({ ...p, score: 0.5 + Math.random() * 0.45 }))
-    .sort((a, b) => b.score - a.score);
-  const box = document.getElementById('ir-results');
-  const cnt = document.getElementById('result-count');
-  box.classList.remove('hidden');
-  cnt.textContent = `"${q}"에 대한 검색 결과 ${scores.length}건`;
-  const old = box.querySelectorAll('.result-item');
-  old.forEach(e => e.remove());
-  scores.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'result-item';
-    div.innerHTML = `
-      <h4>${p.title}</h4>
-      <p>${p.desc}</p>
-      <div class="result-meta">${p.venue} · ${p.authors}</div>
-      <div class="score-bar">
-        <span class="score-label">유사도 ${(p.score*100).toFixed(0)}%</span>
-        <div class="score-bg"><div class="score-fill" style="width:${p.score*100}%"></div></div>
-      </div>`;
-    box.appendChild(div);
-  });
+function toggleDemo(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
 }
 </script>
 </body>

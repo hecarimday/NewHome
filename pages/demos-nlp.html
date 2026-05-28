@@ -12,17 +12,21 @@
     .page-hero { background: var(--bg); padding: 48px 24px 32px; text-align: center; }
     .page-hero h1 { font-size: 36px; font-weight: 700; }
     .page-hero h1 span { color: var(--green); }
-    .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .demo-card { background: var(--white); border-radius: 10px; padding: 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .demo-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-    .demo-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6; }
-    textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; resize: vertical; min-height: 90px; }
-    textarea:focus { outline: none; border-color: var(--green); }
-    .run-btn { margin-top: 10px; padding: 9px 24px; background: var(--green); color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
-    .run-btn:hover { background: var(--green-dark); }
-    .result-box { margin-top: 14px; padding: 14px; background: #f4f4f0; border-radius: 6px; font-size: 14px; line-height: 1.75; border: 1px solid var(--border); min-height: 48px; }
-    .tag-chip { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin: 3px; }
-    @media (max-width: 768px) { .demo-grid { grid-template-columns: 1fr; } }
+    .demo-item { background: var(--white); border-radius: 10px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); overflow: hidden; }
+    .demo-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; background: none; border: none; cursor: pointer; text-align: left; gap: 16px; font-family: inherit; transition: background 0.15s; }
+    .demo-toggle:hover { background: var(--bg); }
+    .demo-toggle-title { font-size: 15px; font-weight: 600; line-height: 1.5; color: var(--text); }
+    .demo-arrow { font-size: 12px; color: var(--text-muted); flex-shrink: 0; transition: transform 0.2s; }
+    .demo-toggle.open .demo-arrow { transform: rotate(180deg); }
+    .demo-content { display: none; padding: 0 24px 24px; border-top: 1px solid var(--border); }
+    .demo-content.open { display: block; }
+    .demo-meta { margin-top: 16px; margin-bottom: 16px; }
+    .demo-meta p { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; line-height: 1.6; }
+    .demo-meta a { color: var(--green); text-decoration: none; }
+    .demo-meta a:hover { text-decoration: underline; }
+    .demo-meta b { color: var(--text); }
+    .demo-video { width: 100%; border-radius: 8px; margin-top: 8px; max-height: 480px; }
+    .demo-video-label { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
   </style>
 </head>
 <body>
@@ -31,7 +35,7 @@
 
 <div class="page-hero">
   <h1><span>N</span>LP Demos</h1>
-  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Natural Language Processing 데모를 체험해 보세요</p>
+  <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Natural Language Processing 데모 동영상</p>
 </div>
 
 <div class="section" style="margin-top:24px;margin-bottom:0;padding-bottom:0">
@@ -44,44 +48,140 @@
 </div>
 
 <div class="section" style="margin-bottom:60px">
-  <div class="demo-grid">
 
-    <div class="demo-card">
-      <h3>감성 분석 (Sentiment Analysis)</h3>
-      <p>텍스트의 긍정/부정/중립 감성을 분석합니다.</p>
-      <textarea id="sa-input" placeholder="분석할 텍스트를 입력하세요&#10;예) 이 영화는 정말 재미있고 감동적이었습니다."></textarea>
-      <button class="run-btn" onclick="runSentiment()">분석하기</button>
-      <div class="result-box" id="sa-result" style="display:none"></div>
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">외부 지식 기반 대화 시스템</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> External Knowledge based Dialogue System</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_external_knowledge_based_dialogue_system.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
-
-    <div class="demo-card">
-      <h3>개체명 인식 (Named Entity Recognition)</h3>
-      <p>텍스트에서 인물, 장소, 기관, 날짜 등의 개체명을 인식합니다.</p>
-      <textarea id="ner-input" placeholder="예) 삼성전자는 2024년 서울 강남구에서 신제품을 발표했습니다."></textarea>
-      <button class="run-btn" onclick="runNER()">인식하기</button>
-      <div class="result-box" id="ner-result" style="display:none"></div>
-    </div>
-
-    <div class="demo-card">
-      <h3>텍스트 요약 (Summarization)</h3>
-      <p>긴 문서나 기사를 짧게 요약합니다.</p>
-      <textarea id="sum-input" placeholder="요약할 텍스트를 입력하세요..." style="min-height:120px"></textarea>
-      <button class="run-btn" onclick="runSummary()">요약하기</button>
-      <div class="result-box" id="sum-result" style="display:none"></div>
-    </div>
-
-    <div class="demo-card">
-      <h3>질의응답 (Question Answering)</h3>
-      <p>주어진 문맥을 기반으로 질문에 답변합니다.</p>
-      <input id="qa-context" type="text" placeholder="문맥: 예) IIS Lab은 성균관대학교에 위치한 AI 연구실입니다."
-        style="width:100%;padding:9px 14px;border:1.5px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;margin-bottom:8px"/>
-      <input id="qa-question" type="text" placeholder="질문: 예) IIS Lab은 어디에 있나요?"
-        style="width:100%;padding:9px 14px;border:1.5px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit"/>
-      <button class="run-btn" onclick="runQA()">답변 생성</button>
-      <div class="result-box" id="qa-result" style="display:none"></div>
-    </div>
-
   </div>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">설명 가능한 질의 응답 시스템</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Explainable Question Answering System</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_explainable_question_answering_system.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">유사 발의를 활용한 초점 기반 다자대화 대화시스템</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> SoPI: Soft Engagement with Pseudo Initatives for Multi-Party Conversations</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_multi-party_conversations.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">대화 내 상식 추론을 이용한 동적 페르소나 기반 대화 시스템</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Dynamic Persona Generation through Commonsense Inference in Dialogues</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_dialogue_based_dynamic_persona.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">지식 기반 응답 생성 모델을 이용한 대화 시스템</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Knowledge-based Response Generation for Dialogue Systems</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_knowledge_based_response_selection.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">통사적 담화 그래프를 이용한 대화 상태 추적 모델</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Dialogue State Tracking Model with a Syntactic Discourse Graph</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_dialogue_state_tracking.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="demo-item">
+    <button class="demo-toggle" onclick="toggleDemo(this)">
+      <span class="demo-toggle-title">가상환경 쇼핑 보조를 위한 대화형 인공지능 에이전트</span>
+      <span class="demo-arrow">▼</span>
+    </button>
+    <div class="demo-content">
+      <div class="demo-meta">
+        <p><b>Title:</b> Multi-modal Dialogue System (DSTC11, SIMMC)</p>
+        <p><b>Github:</b> TBD</p>
+        <p><b>Paper:</b> TBD</p>
+      </div>
+      <div class="demo-video-label">Demo Video</div>
+      <video class="demo-video" controls>
+        <source src="../assets/video/demo_DSTC_SIMMC.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
 </div>
 
 <footer>
@@ -95,51 +195,11 @@
 </footer>
 
 <script>
-/* ── Demo 시뮬레이션 (실제 API 연동 시 교체) ── */
-function runSentiment() {
-  const text = document.getElementById('sa-input').value.trim();
-  if (!text) return alert('텍스트를 입력해 주세요.');
-  const scores = { pos: Math.random()*0.5+0.3, neg: Math.random()*0.3, neu: 0 };
-  scores.neu = 1 - scores.pos - scores.neg;
-  const label = scores.pos > scores.neg ? '긍정 😊' : '부정 😞';
-  const r = document.getElementById('sa-result');
-  r.style.display = 'block';
-  r.innerHTML = `<b>결과:</b> <span class="tag-chip" style="background:#e8f4ea;color:var(--green)">${label}</span><br/>
-    긍정: ${(scores.pos*100).toFixed(1)}% &nbsp; 부정: ${(scores.neg*100).toFixed(1)}% &nbsp; 중립: ${(scores.neu*100).toFixed(1)}%`;
-}
-
-function runNER() {
-  const text = document.getElementById('ner-input').value.trim();
-  if (!text) return alert('텍스트를 입력해 주세요.');
-  const colors = { ORG:'#dce8ff,#3a6fd8', LOC:'#e8f4ea,#2d7a3a', DATE:'#fff3e0,#c0782a', PER:'#f3e8ff,#7a3a9a' };
-  const entities = [
-    { text: '삼성전자', label: 'ORG' }, { text: '서울', label: 'LOC' },
-    { text: '2024년', label: 'DATE' }, { text: '강남구', label: 'LOC' }
-  ];
-  const r = document.getElementById('ner-result');
-  r.style.display = 'block';
-  r.innerHTML = '<b>인식된 개체명:</b><br/><br/>' + entities.map(e => {
-    const [bg, fg] = colors[e.label].split(',');
-    return `<span class="tag-chip" style="background:${bg};color:${fg}">${e.text} <b>${e.label}</b></span>`;
-  }).join(' ');
-}
-
-function runSummary() {
-  const text = document.getElementById('sum-input').value.trim();
-  if (!text) return alert('텍스트를 입력해 주세요.');
-  const preview = text.length > 80 ? text.slice(0, 80) + '...' : text;
-  const r = document.getElementById('sum-result');
-  r.style.display = 'block';
-  r.innerHTML = `<b>요약:</b><br/>${preview}<br/><br/><span style="color:var(--text-muted);font-size:12px">* 실제 모델 API 연동 시 정확한 요약이 제공됩니다.</span>`;
-}
-
-function runQA() {
-  const ctx = document.getElementById('qa-context').value.trim();
-  const q = document.getElementById('qa-question').value.trim();
-  if (!ctx || !q) return alert('문맥과 질문을 모두 입력해 주세요.');
-  const r = document.getElementById('qa-result');
-  r.style.display = 'block';
-  r.innerHTML = `<b>답변:</b> 성균관대학교<br/><br/><span style="color:var(--text-muted);font-size:12px">* 실제 모델 API 연동 시 정확한 답변이 제공됩니다.</span>`;
+function toggleDemo(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
 }
 </script>
 </body>
