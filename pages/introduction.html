@@ -24,7 +24,14 @@
     .info-row .label { color: var(--text-muted); min-width: 60px; flex-shrink: 0; }
     .info-row .value { font-weight: 500; color: var(--text); }
     .keyword-list { display: flex; flex-wrap: wrap; gap: 8px; }
-    .keyword { background: #e8f4ea; color: var(--green); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+    .keyword { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+    .tag-ml   { background: #B8FFBA; color: #004702; }
+    .tag-kg   { background: #E0C1F5; color: #431065; }
+    .tag-rag  { background: #F7E7B5; color: #403207; }
+    .tag-dial { background: #CEF5EE; color: #146153; }
+    .tag-int  { background: #D6E4FF; color: #1E3A8A; }
+    .tag-eff  { background: #CCD6E1; color: #3B4E65; }
+    .tag-eth  { background: #F5CECE; color: #871C1C; }
     @media (max-width: 900px) { .intro-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -67,24 +74,24 @@
 
       <h2 style="margin-top:28px">Research Keywords</h2>
       <div class="keyword-list">
-        <span class="keyword">Reinforcement Learning</span>
-        <span class="keyword">Knowledge Distillation</span>
-        <span class="keyword">KG Construction</span>
-        <span class="keyword">KG Retrieval</span>
-        <span class="keyword">Text-to-GQL</span>
-        <span class="keyword">KG QA</span>
-        <span class="keyword">RAG</span>
-        <span class="keyword">Multi-Document Compression</span>
-        <span class="keyword">Personalized Dialogue</span>
-        <span class="keyword">Long-Term Dialogue</span>
-        <span class="keyword">Multi-Party Dialogue</span>
-        <span class="keyword">LLM Calibration</span>
-        <span class="keyword">Uncertainty Qualification</span>
-        <span class="keyword">PEFT</span>
-        <span class="keyword">Efficient Inference</span>
-        <span class="keyword">KV Eviction</span>
-        <span class="keyword">Model Alignment</span>
-        <span class="keyword">Bias & Unfairness Mitigation</span>
+        <span class="keyword tag-ml">Reinforcement Learning</span>
+        <span class="keyword tag-ml">Knowledge Distillation</span>
+        <span class="keyword tag-kg">KG Construction</span>
+        <span class="keyword tag-kg">KG Retrieval</span>
+        <span class="keyword tag-kg">Text-to-GQL</span>
+        <span class="keyword tag-kg">KG QA</span>
+        <span class="keyword tag-rag">RAG</span>
+        <span class="keyword tag-rag">Multi-Document Compression</span>
+        <span class="keyword tag-dial">Personalized Dialogue</span>
+        <span class="keyword tag-dial">Long-Term Dialogue</span>
+        <span class="keyword tag-dial">Multi-Party Dialogue</span>
+        <span class="keyword tag-int">LLM Calibration</span>
+        <span class="keyword tag-int">Uncertainty Qualification</span>
+        <span class="keyword tag-eff">PEFT</span>
+        <span class="keyword tag-eff">Efficient Inference</span>
+        <span class="keyword tag-eff">KV Eviction</span>
+        <span class="keyword tag-eth">Model Alignment</span>
+        <span class="keyword tag-eth">Bias & Unfairness Mitigation</span>
       </div>
     </div>
 
