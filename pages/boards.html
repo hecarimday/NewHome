@@ -57,6 +57,19 @@
     .cat-XAI  { background:#fff3e0; color:#c07820; }
     .cat-PEFT { background:#e8f8ff; color:#1a7a9a; }
 
+    .board-pagination {
+      display: flex; justify-content: center; align-items: center;
+      gap: 6px; padding: 16px 0;
+    }
+    .board-pagination button {
+      min-width: 32px; height: 32px; padding: 0 10px;
+      border: 1px solid var(--border); background: #fff;
+      color: var(--text); font-size: 13px; font-family: inherit;
+      border-radius: 4px; cursor: pointer; transition: 0.15s;
+    }
+    .board-pagination button:hover { background: #f0f8f2; border-color: var(--green); color: var(--green); }
+    .board-pagination button.active { background: var(--green); color: #fff; border-color: var(--green); font-weight: 700; }
+
     .board-search {
       display: flex; gap: 8px; padding: 14px 20px;
       border-top: 1px solid var(--border);
@@ -128,6 +141,7 @@
           </tr>
         </tbody>
       </table>
+      <div id="pagination-notice"></div>
     </div>
 
     <!-- 세미나 (논문 리뷰) -->
@@ -222,6 +236,7 @@
           </tr>
         </tbody>
       </table>
+      <div id="pagination-seminar"></div>
     </div>
 
     <div class="board-search">
@@ -244,7 +259,41 @@
 </footer>
 
 <script>
+const PAGE_SIZE = 15;
 let currentTab = 'notice';
+const pageState = { notice: 1, seminar: 1 };
+
+function getPageRows(tab) {
+  return Array.from(document.querySelectorAll('#board-' + tab + ' tbody tr:not(.notice-row)'));
+}
+
+function applyPagination(tab) {
+  const rows = getPageRows(tab);
+  const page = pageState[tab];
+  const total = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  const start = (page - 1) * PAGE_SIZE;
+
+  rows.forEach((row, i) => {
+    row.style.display = (i >= start && i < start + PAGE_SIZE) ? '' : 'none';
+  });
+
+  const el = document.getElementById('pagination-' + tab);
+  if (!el || total <= 1) { if (el) el.innerHTML = ''; return; }
+
+  let html = '<div class="board-pagination">';
+  if (page > 1) html += `<button onclick="goPage('${tab}',${page - 1})">이전</button>`;
+  for (let i = 1; i <= total; i++) {
+    html += `<button class="${i === page ? 'active' : ''}" onclick="goPage('${tab}',${i})">${i}</button>`;
+  }
+  if (page < total) html += `<button onclick="goPage('${tab}',${page + 1})">다음</button>`;
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function goPage(tab, page) {
+  pageState[tab] = page;
+  applyPagination(tab);
+}
 
 function switchTab(tab) {
   currentTab = tab;
@@ -252,7 +301,6 @@ function switchTab(tab) {
   document.getElementById('tab-seminar').classList.toggle('active', tab === 'seminar');
   document.getElementById('board-notice').style.display  = tab === 'notice'  ? 'block' : 'none';
   document.getElementById('board-seminar').style.display = tab === 'seminar' ? 'block' : 'none';
-  // URL에 탭 상태 반영 (뒤로가기 시 복원)
   history.replaceState(null, '', '?tab=' + tab);
 }
 
@@ -263,19 +311,24 @@ function goPost(tab, id) {
 function doSearch() {
   const type    = document.getElementById('search-type').value;
   const keyword = document.getElementById('search-input').value.trim().toLowerCase();
+
   if (!keyword) {
-    document.querySelectorAll('#board-' + currentTab + ' tbody tr').forEach(r => r.style.display = '');
+    applyPagination(currentTab);
     return;
   }
-  document.querySelectorAll('#board-' + currentTab + ' tbody tr').forEach(row => {
+
+  const rows = getPageRows(currentTab);
+  rows.forEach(row => {
     const title  = row.querySelector('.post-title-cell')?.textContent.toLowerCase() || '';
     const author = row.querySelector('.author')?.textContent.toLowerCase() || '';
     row.style.display = (type === '작성자' ? author : title).includes(keyword) ? '' : 'none';
   });
+  document.getElementById('pagination-' + currentTab).innerHTML = '';
 }
 
-// URL 파라미터로 탭 복원
 (function () {
+  applyPagination('notice');
+  applyPagination('seminar');
   const tab = new URLSearchParams(location.search).get('tab') || 'notice';
   switchTab(tab);
 })();
