@@ -120,26 +120,7 @@
             <th class="date">날짜</th>
           </tr>
         </thead>
-        <tbody>
-          <tr class="notice-row" onclick="goPost('notice',0)">
-            <td class="num">📌</td>
-            <td class="post-title-cell">NLPLAB 하반기 인턴 모집 공고 <span class="badge-new">NEW</span></td>
-            <td class="author">김두영</td>
-            <td class="date">2026.05.28</td>
-          </tr>
-          <tr onclick="goPost('notice',1)">
-            <td class="num">2</td>
-            <td class="post-title-cell">제 2회 오픈 랩 세미나: 효율적 추론을 위한 압축 기법</td>
-            <td class="author">김두영</td>
-            <td class="date">2026.05.13</td>
-          </tr>
-          <tr onclick="goPost('notice',2)">
-            <td class="num">1</td>
-            <td class="post-title-cell">제 1회 오픈 랩 세미나: Policy Optimization 기반 강화학습 연구 동향</td>
-            <td class="author">김두영</td>
-            <td class="date">2026.03.26</td>
-          </tr>
-        </tbody>
+        <tbody id="tbody-notice"></tbody>
       </table>
       <div id="pagination-notice"></div>
     </div>
@@ -156,85 +137,7 @@
             <th class="date">날짜</th>
           </tr>
         </thead>
-        <tbody>
-          <tr onclick="goPost('seminar',0)">
-            <td class="num">11</td>
-            <td class="post-title-cell">HiPRAG: Hierarchical Process Rewards for Efficient Agentic Retrieval Augmented Generation</td>
-            <td class="cat"><span class="cat-badge cat-RAG">RAG</span></td>
-            <td class="author">이준서</td>
-            <td class="date">2026.04.13</td>
-          </tr>
-          <tr onclick="goPost('seminar',1)">
-            <td class="num">10</td>
-            <td class="post-title-cell">RoFormer: Enhanced Transformer with Rotary Position Embedding</td>
-            <td class="cat"><span class="cat-badge cat-LM">LM</span></td>
-            <td class="author">한준호</td>
-            <td class="date">2026.04.08</td>
-          </tr>
-          <tr onclick="goPost('seminar',2)">
-            <td class="num">9</td>
-            <td class="post-title-cell">DARL: Encouraging Diverse Answers for General Reasoning without Verifiers</td>
-            <td class="cat"><span class="cat-badge cat-RL">RL</span></td>
-            <td class="author">김두영</td>
-            <td class="date">2026.04.01</td>
-          </tr>
-          <tr onclick="goPost('seminar',3)">
-            <td class="num">8</td>
-            <td class="post-title-cell">DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models (GRPO)</td>
-            <td class="cat"><span class="cat-badge cat-RL">RL</span></td>
-            <td class="author">김두영</td>
-            <td class="date">2026.03.26</td>
-          </tr>
-          <tr onclick="goPost('seminar',4)">
-            <td class="num">7</td>
-            <td class="post-title-cell">ReMindRAG: Low-Cost LLM-Guided Knowledge Graph Traversal for Efficient RAG</td>
-            <td class="cat"><span class="cat-badge cat-RAG">RAG</span></td>
-            <td class="author">이준서</td>
-            <td class="date">2026.03.23</td>
-          </tr>
-          <tr onclick="goPost('seminar',5)">
-            <td class="num">6</td>
-            <td class="post-title-cell">Mixture-of-Subspaces in Low-Rank Adaptation</td>
-            <td class="cat"><span class="cat-badge cat-PEFT">PEFT</span></td>
-            <td class="author">이예원</td>
-            <td class="date">2026.03.23</td>
-          </tr>
-          <tr onclick="goPost('seminar',6)">
-            <td class="num">5</td>
-            <td class="post-title-cell">Learning Multi-Level Features with Matryoshka Sparse Autoencoders</td>
-            <td class="cat"><span class="cat-badge cat-XAI">XAI</span></td>
-            <td class="author">이준희</td>
-            <td class="date">2026.03.23</td>
-          </tr>
-          <tr onclick="goPost('seminar',7)">
-            <td class="num">4</td>
-            <td class="post-title-cell">Dense Passage Retrieval for Open-Domain Question Answering</td>
-            <td class="cat"><span class="cat-badge cat-IR">IR</span></td>
-            <td class="author">한준호</td>
-            <td class="date">2026.03.23</td>
-          </tr>
-          <tr onclick="goPost('seminar',8)">
-            <td class="num">3</td>
-            <td class="post-title-cell">Ask Optimal Questions: Aligning Large Language Models with Retriever's Preference in Conversational Search</td>
-            <td class="cat"><span class="cat-badge cat-IR">IR</span></td>
-            <td class="author">이예원</td>
-            <td class="date">2026.03.23</td>
-          </tr>
-          <tr onclick="goPost('seminar',9)">
-            <td class="num">2</td>
-            <td class="post-title-cell">Approximate Nearest Neighbor Negative Contrastive Learning for Dense Text Retrieval</td>
-            <td class="cat"><span class="cat-badge cat-IR">IR</span></td>
-            <td class="author">한준호</td>
-            <td class="date">2026.03.23</td>
-          </tr>
-          <tr onclick="goPost('seminar',10)">
-            <td class="num">1</td>
-            <td class="post-title-cell">Proximal Policy Optimization Algorithms</td>
-            <td class="cat"><span class="cat-badge cat-RL">RL</span></td>
-            <td class="author">김두영</td>
-            <td class="date">2026.03.17</td>
-          </tr>
-        </tbody>
+        <tbody id="tbody-seminar"></tbody>
       </table>
       <div id="pagination-seminar"></div>
     </div>
@@ -263,36 +166,63 @@ const PAGE_SIZE = 15;
 let currentTab = 'notice';
 const pageState = { notice: 1, seminar: 1 };
 
-function getPageRows(tab) {
-  return Array.from(document.querySelectorAll('#board-' + tab + ' tbody tr:not(.notice-row)'));
+function isNew(dateStr) {
+  const [y, m, d] = dateStr.split('.');
+  return (new Date() - new Date(+y, +m - 1, +d)) / 86400000 <= 7;
 }
 
-function applyPagination(tab) {
-  const rows = getPageRows(tab);
-  const page = pageState[tab];
-  const total = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
-  const start = (page - 1) * PAGE_SIZE;
+function renderBoard(tab) {
+  const posts   = window.POSTS[tab] || [];
+  const pinned  = posts.filter(p => p.pinned);
+  const regular = posts.filter(p => !p.pinned);
+  const page    = pageState[tab];
+  const total   = Math.max(1, Math.ceil(regular.length / PAGE_SIZE));
+  const start   = (page - 1) * PAGE_SIZE;
+  const isSeminar = tab === 'seminar';
+  let html = '';
 
-  rows.forEach((row, i) => {
-    row.style.display = (i >= start && i < start + PAGE_SIZE) ? '' : 'none';
+  pinned.forEach(p => {
+    const idx = posts.indexOf(p);
+    const newBadge = isNew(p.date) ? '<span class="badge-new">NEW</span>' : '';
+    html += `<tr class="notice-row" onclick="goPost('${tab}',${idx})">
+      <td class="num">📌</td>
+      <td class="post-title-cell">${p.title} ${newBadge}</td>
+      ${isSeminar ? `<td class="cat"><span class="cat-badge cat-${p.category}">${p.category}</span></td>` : ''}
+      <td class="author">${p.author}</td>
+      <td class="date">${p.date}</td>
+    </tr>`;
   });
 
-  const el = document.getElementById('pagination-' + tab);
-  if (!el || total <= 1) { if (el) el.innerHTML = ''; return; }
+  regular.slice(start, start + PAGE_SIZE).forEach((p, i) => {
+    const idx = posts.indexOf(p);
+    const num = regular.length - (start + i);
+    const newBadge = isNew(p.date) ? '<span class="badge-new">NEW</span>' : '';
+    html += `<tr onclick="goPost('${tab}',${idx})">
+      <td class="num">${num}</td>
+      <td class="post-title-cell">${p.title} ${newBadge}</td>
+      ${isSeminar ? `<td class="cat"><span class="cat-badge cat-${p.category}">${p.category}</span></td>` : ''}
+      <td class="author">${p.author}</td>
+      <td class="date">${p.date}</td>
+    </tr>`;
+  });
 
-  let html = '<div class="board-pagination">';
-  if (page > 1) html += `<button onclick="goPage('${tab}',${page - 1})">이전</button>`;
+  document.getElementById('tbody-' + tab).innerHTML = html;
+
+  const el = document.getElementById('pagination-' + tab);
+  if (total <= 1) { el.innerHTML = ''; return; }
+  let pager = '<div class="board-pagination">';
+  if (page > 1) pager += `<button onclick="goPage('${tab}',${page-1})">이전</button>`;
   for (let i = 1; i <= total; i++) {
-    html += `<button class="${i === page ? 'active' : ''}" onclick="goPage('${tab}',${i})">${i}</button>`;
+    pager += `<button class="${i===page?'active':''}" onclick="goPage('${tab}',${i})">${i}</button>`;
   }
-  if (page < total) html += `<button onclick="goPage('${tab}',${page + 1})">다음</button>`;
-  html += '</div>';
-  el.innerHTML = html;
+  if (page < total) pager += `<button onclick="goPage('${tab}',${page+1})">다음</button>`;
+  pager += '</div>';
+  el.innerHTML = pager;
 }
 
 function goPage(tab, page) {
   pageState[tab] = page;
-  applyPagination(tab);
+  renderBoard(tab);
 }
 
 function switchTab(tab) {
@@ -311,24 +241,47 @@ function goPost(tab, id) {
 function doSearch() {
   const type    = document.getElementById('search-type').value;
   const keyword = document.getElementById('search-input').value.trim().toLowerCase();
+  if (!keyword) { renderBoard(currentTab); return; }
 
-  if (!keyword) {
-    applyPagination(currentTab);
-    return;
-  }
+  const posts   = window.POSTS[currentTab] || [];
+  const pinned  = posts.filter(p => p.pinned);
+  const regular = posts.filter(p => !p.pinned);
+  const isSeminar = currentTab === 'seminar';
+  let html = '';
 
-  const rows = getPageRows(currentTab);
-  rows.forEach(row => {
-    const title  = row.querySelector('.post-title-cell')?.textContent.toLowerCase() || '';
-    const author = row.querySelector('.author')?.textContent.toLowerCase() || '';
-    row.style.display = (type === '작성자' ? author : title).includes(keyword) ? '' : 'none';
+  pinned.forEach(p => {
+    const idx = posts.indexOf(p);
+    const newBadge = isNew(p.date) ? '<span class="badge-new">NEW</span>' : '';
+    html += `<tr class="notice-row" onclick="goPost('${currentTab}',${idx})">
+      <td class="num">📌</td>
+      <td class="post-title-cell">${p.title} ${newBadge}</td>
+      ${isSeminar ? `<td class="cat"><span class="cat-badge cat-${p.category}">${p.category}</span></td>` : ''}
+      <td class="author">${p.author}</td>
+      <td class="date">${p.date}</td>
+    </tr>`;
   });
+
+  regular.forEach((p, i) => {
+    const val = (type === '작성자' ? p.author : p.title).toLowerCase();
+    if (!val.includes(keyword)) return;
+    const idx = posts.indexOf(p);
+    const newBadge = isNew(p.date) ? '<span class="badge-new">NEW</span>' : '';
+    html += `<tr onclick="goPost('${currentTab}',${idx})">
+      <td class="num">${regular.length - i}</td>
+      <td class="post-title-cell">${p.title} ${newBadge}</td>
+      ${isSeminar ? `<td class="cat"><span class="cat-badge cat-${p.category}">${p.category}</span></td>` : ''}
+      <td class="author">${p.author}</td>
+      <td class="date">${p.date}</td>
+    </tr>`;
+  });
+
+  document.getElementById('tbody-' + currentTab).innerHTML = html;
   document.getElementById('pagination-' + currentTab).innerHTML = '';
 }
 
 (function () {
-  applyPagination('notice');
-  applyPagination('seminar');
+  renderBoard('notice');
+  renderBoard('seminar');
   const tab = new URLSearchParams(location.search).get('tab') || 'notice';
   switchTab(tab);
 })();
