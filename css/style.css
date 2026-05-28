@@ -571,16 +571,12 @@ img { max-width: 100%; display: block; }
 .member-card {
   background: var(--white);
   border-radius: 8px;
-  overflow: hidden;
+  padding: 16px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   transition: transform 0.2s;
-  display: flex;
-  flex-direction: column;
 }
 .member-card:hover { transform: translateY(-2px); }
-.member-card > .member-name { margin-top: 12px; padding: 0 16px; }
-.member-card > .member-role { padding: 0 16px 16px; }
 
 .member-avatar {
   width: 72px;
