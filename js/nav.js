@@ -28,15 +28,15 @@
     { label: 'Publications', href: P + 'publications.html' },
     { label: 'Members',      href: P + 'members.html' },
     // TODO: Demos 준비 완료 후 아래 주석 해제
-    // {
-    //   label: 'Demos',
-    //   children: [
-    //     { label: 'NLP',           href: P + 'demos-nlp.html' },
-    //     { label: 'IR',            href: P + 'demos-ir.html' },
-    //     { label: 'Text Mining',   href: P + 'demos-textmining.html' },
-    //     { label: 'Generative AI', href: P + 'demos-generativeai.html' },
-    //   ]
-    // },
+    {
+      label: 'Demos',
+      children: [
+        { label: 'NLP',           href: P + 'demos-nlp.html' },
+        { label: 'IR',            href: P + 'demos-ir.html' },
+        { label: 'Text Mining',   href: P + 'demos-textmining.html' },
+        { label: 'Generative AI', href: P + 'demos-generativeai.html' },
+      ]
+    },
     { label: 'Boards', href: P + 'boards.html' },
   ];
 
