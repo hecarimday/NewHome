@@ -72,9 +72,31 @@
     </li>`;
   }
 
+  function buildMobileItem(item) {
+    const hasChildren = item.children && item.children.length;
+    const isActive = item.label === activeLabel;
+
+    if (hasChildren) {
+      const childLinks = item.children.map(c =>
+        `<a class="mobile-sub-link" href="${c.href}">${c.label}</a>`
+      ).join('');
+      return `
+        <div class="mobile-nav-group${isActive ? ' active' : ''}">
+          <button class="mobile-nav-toggle" onclick="this.parentElement.classList.toggle('open')">
+            ${item.label}<span class="mobile-caret">▾</span>
+          </button>
+          <div class="mobile-sub-menu">${childLinks}</div>
+        </div>`;
+    }
+    return `<a class="mobile-nav-link${isActive ? ' active' : ''}" href="${item.href}">${item.label}</a>`;
+  }
+
   const html = `
     <nav class="navbar" id="main-navbar">
       <div class="nav-inner">
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
         <a class="nav-brand" href="${ROOT}index.html">NLPLAB</a>
         <ul class="nav-menu">
           ${NAV.map(buildItem).join('')}
@@ -88,7 +110,40 @@
           </button>
         </div>
       </div>
-    </nav>`;
+    </nav>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-menu-header">
+        <a class="mobile-menu-brand" href="${ROOT}index.html">NLPLAB</a>
+        <button class="mobile-menu-close" id="mobile-menu-close" aria-label="메뉴 닫기">✕</button>
+      </div>
+      <div class="mobile-menu-body">
+        ${NAV.map(buildMobileItem).join('')}
+      </div>
+      <div class="mobile-menu-footer">
+        <a class="mobile-contact-btn" href="${P}contact.html">Contact Us</a>
+      </div>
+    </div>`;
 
   document.body.insertAdjacentHTML('afterbegin', html);
+
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const closeBtn = document.getElementById('mobile-menu-close');
+
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
 })();
