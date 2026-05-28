@@ -55,11 +55,18 @@
     }
     .post-header-meta {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      justify-content: space-between;
       align-items: flex-start;
-      gap: 6px;
+      gap: 8px;
       font-size: 13px;
       color: #666;
+    }
+    .post-header-meta-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
     }
     .post-header-meta .cat-badge {
       display: inline-block;
@@ -312,8 +319,10 @@
   const catClass = 'cat-' + post.category.replace(/^논문-리뷰-/, '');
   document.getElementById('post-meta').innerHTML =
     `<span>작성자: <strong>${post.author}</strong></span>` +
-    `<span><span class="cat-badge ${catClass}">${post.category}</span></span>` +
-    `<span>작성일: ${post.date}</span>`;
+    `<div class="post-header-meta-right">` +
+      `<span><span class="cat-badge ${catClass}">${post.category}</span></span>` +
+      `<span>작성일: ${post.date}</span>` +
+    `</div>`;
 
   // ── 첨부파일 ──
   if (post.attachments && post.attachments.length > 0) {
