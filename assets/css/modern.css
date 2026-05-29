@@ -1,5 +1,5 @@
 /* ============================================================
-   NLPLab SKKU — iislab-style redesign
+   NLPLab SKKU
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
@@ -132,12 +132,12 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================
    HERO
    ============================================================ */
-.iis-hero {
+.nlp-hero {
   padding: 96px 0 80px;
   border-bottom: 1px solid #e5e5e5;
 }
 
-.iis-hero__univ {
+.nlp-hero__univ {
   font-size: 13px;
   font-weight: 500;
   color: #999;
@@ -145,7 +145,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 14px;
 }
 
-.iis-hero__title {
+.nlp-hero__title {
   font-size: 2.8rem;
   font-weight: 700;
   color: #111;
@@ -154,7 +154,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 20px;
 }
 
-.iis-hero__sub {
+.nlp-hero__sub {
   font-size: 15px;
   color: #666;
   line-height: 1.75;
@@ -162,13 +162,13 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 36px;
 }
 
-.iis-hero__links {
+.nlp-hero__links {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.iis-btn {
+.nlp-btn {
   display: inline-block;
   padding: 9px 20px;
   font-size: 13px;
@@ -177,39 +177,39 @@ a { color: inherit; text-decoration: none; }
   transition: background 0.12s, color 0.12s;
 }
 
-.iis-btn--dark {
+.nlp-btn--dark {
   background: #111;
   color: #fff;
 }
 
-.iis-btn--dark:hover { background: #333; color: #fff; }
+.nlp-btn--dark:hover { background: #333; color: #fff; }
 
-.iis-btn--outline {
+.nlp-btn--outline {
   background: #fff;
   color: #111;
   border: 1px solid #ddd;
 }
 
-.iis-btn--outline:hover { border-color: #999; background: #fafafa; }
+.nlp-btn--outline:hover { border-color: #999; background: #fafafa; }
 
 /* ============================================================
    SECTIONS — shared
    ============================================================ */
-.iis-section {
+.nlp-section {
   padding: 72px 0;
   border-bottom: 1px solid #e5e5e5;
 }
 
-.iis-section:last-child { border-bottom: none; }
+.nlp-section:last-child { border-bottom: none; }
 
-.iis-section__head {
+.nlp-section__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 48px;
 }
 
-.iis-section__label {
+.nlp-section__label {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -217,7 +217,7 @@ a { color: inherit; text-decoration: none; }
   color: #111;
 }
 
-.iis-section__viewall {
+.nlp-section__viewall {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -225,12 +225,12 @@ a { color: inherit; text-decoration: none; }
   transition: color 0.12s;
 }
 
-.iis-section__viewall:hover { color: #111; }
+.nlp-section__viewall:hover { color: #111; }
 
 /* ============================================================
    OUR LAB — 3 columns
    ============================================================ */
-.iis-lab__desc {
+.nlp-lab__desc {
   font-size: 15px;
   color: #555;
   line-height: 1.75;
@@ -238,48 +238,48 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 48px;
 }
 
-.iis-lab__cols {
+.nlp-lab__cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
   border-top: 1px solid #e5e5e5;
 }
 
-.iis-lab__col {
+.nlp-lab__col {
   padding: 32px 32px 32px 0;
   border-right: 1px solid #e5e5e5;
 }
 
-.iis-lab__col:last-child {
+.nlp-lab__col:last-child {
   border-right: none;
   padding-right: 0;
   padding-left: 32px;
 }
 
-.iis-lab__col:not(:first-child):not(:last-child) {
+.nlp-lab__col:not(:first-child):not(:last-child) {
   padding-left: 32px;
 }
 
-.iis-lab__col-title {
+.nlp-lab__col-title {
   font-size: 14px;
   font-weight: 700;
   color: #111;
   margin-bottom: 16px;
 }
 
-.iis-lab__col-list {
+.nlp-lab__col-list {
   list-style: none;
   padding: 0;
 }
 
-.iis-lab__col-list li {
+.nlp-lab__col-list li {
   font-size: 13px;
   color: #666;
   line-height: 2;
   padding-left: 0;
 }
 
-.iis-lab__col-list li::before {
+.nlp-lab__col-list li::before {
   content: '· ';
   color: #aaa;
 }
@@ -287,15 +287,15 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================
    NEWS GRID
    ============================================================ */
-.iis-news__grid {
+.nlp-news__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.iis-news__item {}
+.nlp-news__item {}
 
-.iis-news__item img {
+.nlp-news__item img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
@@ -305,7 +305,7 @@ a { color: inherit; text-decoration: none; }
   background: #f5f5f5;
 }
 
-.iis-news__date {
+.nlp-news__date {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -315,7 +315,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 4px;
 }
 
-.iis-news__caption {
+.nlp-news__caption {
   font-size: 13px;
   color: #444;
   line-height: 1.55;
@@ -324,12 +324,12 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================
    PUBLICATIONS LIST
    ============================================================ */
-.iis-pub__list {
+.nlp-pub__list {
   list-style: none;
   padding: 0;
 }
 
-.iis-pub__list li {
+.nlp-pub__list li {
   padding: 18px 0;
   border-bottom: 1px solid #f0f0f0;
   font-size: 13.5px;
@@ -337,11 +337,11 @@ a { color: inherit; text-decoration: none; }
   color: #333;
 }
 
-.iis-pub__list li:last-child { border-bottom: none; }
+.nlp-pub__list li:last-child { border-bottom: none; }
 
-.iis-pub__title { font-weight: 600; color: #111; }
-.iis-pub__authors { color: #777; font-size: 12.5px; }
-.iis-pub__venue {
+.nlp-pub__title { font-weight: 600; color: #111; }
+.nlp-pub__authors { color: #777; font-size: 12.5px; }
+.nlp-pub__venue {
   display: inline-block;
   margin-top: 4px;
   font-size: 12px;
@@ -402,9 +402,9 @@ a { color: inherit; text-decoration: none; }
    RESPONSIVE
    ============================================================ */
 @media (max-width: 900px) {
-  .iis-lab__cols { grid-template-columns: 1fr 1fr; }
-  .iis-news__grid { grid-template-columns: 1fr 1fr; }
-  .iis-lab__col:nth-child(2) { border-right: none; }
+  .nlp-lab__cols { grid-template-columns: 1fr 1fr; }
+  .nlp-news__grid { grid-template-columns: 1fr 1fr; }
+  .nlp-lab__col:nth-child(2) { border-right: none; }
 }
 
 @media (max-width: 640px) {
@@ -415,13 +415,13 @@ a { color: inherit; text-decoration: none; }
   .site-nav ul { flex-direction: column; padding: 12px 20px; gap: 0; }
   .site-nav ul li a { padding: 10px 0; border-radius: 0; font-size: 15px; }
   .site-nav__toggle { display: flex; }
-  .iis-hero { padding: 56px 0 48px; }
-  .iis-hero__title { font-size: 2rem; }
-  .iis-lab__cols { grid-template-columns: 1fr; }
-  .iis-lab__col { border-right: none; padding: 24px 0; border-bottom: 1px solid #e5e5e5; }
-  .iis-lab__col:last-child { padding-left: 0; }
-  .iis-lab__col:not(:first-child):not(:last-child) { padding-left: 0; }
-  .iis-news__grid { grid-template-columns: 1fr; }
-  .iis-section { padding: 48px 0; }
+  .nlp-hero { padding: 56px 0 48px; }
+  .nlp-hero__title { font-size: 2rem; }
+  .nlp-lab__cols { grid-template-columns: 1fr; }
+  .nlp-lab__col { border-right: none; padding: 24px 0; border-bottom: 1px solid #e5e5e5; }
+  .nlp-lab__col:last-child { padding-left: 0; }
+  .nlp-lab__col:not(:first-child):not(:last-child) { padding-left: 0; }
+  .nlp-news__grid { grid-template-columns: 1fr; }
+  .nlp-section { padding: 48px 0; }
   .site-footer__inner { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
 }
