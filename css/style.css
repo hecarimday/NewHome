@@ -1,6 +1,8 @@
 /* ── Reset & Base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { background: #2a2a2a; }
+
 :root {
   --green: #3a7d44;
   --green-light: #5aab68;
@@ -19,9 +21,6 @@ body {
   color: var(--text);
   font-size: 15px;
   line-height: 1.6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -672,7 +671,7 @@ img { max-width: 100%; display: block; }
 
 /* ── Footer ── */
 footer {
-  margin-top: auto;
+  margin-top: 80px;
   background: #2a2a2a;
   color: #aaa;
   padding: 40px 24px;
