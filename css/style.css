@@ -91,9 +91,9 @@ img { max-width: 100%; display: block; }
   -webkit-text-stroke: 0.8px rgba(255,255,255,0.85);
   display: inline-block;
 }
-.brand-n { background-image: linear-gradient(to bottom, #ffffff 0%, #e05050 100%); }
-.brand-l { background-image: linear-gradient(to bottom, #ffffff 0%, #5080e0 100%); }
-.brand-p { background-image: linear-gradient(to bottom, #ffffff 0%, #e08830 100%); }
+.brand-n { background-image: none; -webkit-text-fill-color: #e05050; }
+.brand-l { background-image: none; -webkit-text-fill-color: #5080e0; }
+.brand-p { background-image: none; -webkit-text-fill-color: #e08830; }
 
 /* ── Nav menu items ── */
 .nav-menu {
