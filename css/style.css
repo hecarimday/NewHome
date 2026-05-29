@@ -490,9 +490,6 @@ img { max-width: 100%; display: block; }
   justify-content: center;
 }
 
-.research-row--bottom {
-  padding: 0 calc(12.5% + 2.5px);
-}
 
 .research-card {
   flex: 0 0 calc(25% - 15px);
