@@ -85,10 +85,8 @@ img { max-width: 100%; display: block; }
 .nav-brand:hover { color: #7dd49a; }
 
 .brand-n, .brand-l, .brand-p {
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 0.8px rgba(255,255,255,0.85);
+  paint-order: stroke fill;
   display: inline-block;
 }
 .brand-n { background-image: none; -webkit-text-fill-color: #e05050; }
