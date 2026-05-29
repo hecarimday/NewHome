@@ -82,6 +82,16 @@ img { max-width: 100%; display: block; }
 }
 .nav-brand:hover { color: #7dd49a; }
 
+.brand-n, .brand-l, .brand-p {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.brand-n { background-image: linear-gradient(to bottom, #ffffff 0%, #e05050 100%); }
+.brand-l { background-image: linear-gradient(to bottom, #ffffff 0%, #5080e0 100%); }
+.brand-p { background-image: linear-gradient(to bottom, #ffffff 0%, #e08830 100%); }
+
 /* ── Nav menu items ── */
 .nav-menu {
   display: flex;
