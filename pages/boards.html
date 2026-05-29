@@ -23,6 +23,12 @@
     .board-tab:hover { color: var(--green); background: #f7fbf8; }
 
     .board-wrap { background: var(--white); border-radius: 0 0 10px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); overflow: hidden; }
+    @media (max-width: 600px) {
+      .board-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      thead th { padding: 10px 10px; font-size: 11px; }
+      tbody td { padding: 10px 10px; font-size: 13px; }
+      td.author, td.date { display: none; }
+    }
 
     table { width: 100%; border-collapse: collapse; }
     thead th {

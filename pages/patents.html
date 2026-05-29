@@ -24,6 +24,12 @@
     .patent-table td { padding: 14px 20px; border-bottom: 1px solid #f0f0ec; font-size: 14px; vertical-align: top; }
     .patent-table tr:last-child td { border-bottom: none; }
     .patent-table tr:hover td { background: #fafaf8; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 600px) {
+      .patent-table th, .patent-table td { padding: 10px 12px; font-size: 12px; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .stat-num { font-size: 28px; }
+    }
 .patent-title { font-weight: 600; margin-bottom: 4px; }
     .patent-desc { font-size: 12px; color: var(--text-muted); font-style: italic; }
   </style>
@@ -53,6 +59,7 @@
     <div class="stat-box"><div class="stat-num" style="color:#e07820;">44</div><div class="stat-label">등록</div></div>
   </div>
 
+  <div class="table-scroll">
   <table class="patent-table">
     <thead>
       <tr>
@@ -643,6 +650,7 @@
 
     </tbody>
   </table>
+  </div>
 
 </div>
 
