@@ -98,7 +98,7 @@
         <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기">
           <span></span><span></span><span></span>
         </button>
-        <a class="nav-brand" href="${ROOT}index.html">NLPLAB</a>
+        <a class="nav-brand" href="${ROOT}index.html"><span style="color:#e05050">N</span><span style="color:#5080e0">L</span><span style="color:#e08830">P</span>LAB</a>
         <ul class="nav-menu">
           ${NAV.map(buildItem).join('')}
         </ul>
@@ -115,7 +115,7 @@
     <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
     <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-menu-header">
-        <a class="mobile-menu-brand" href="${ROOT}index.html">NLPLAB</a>
+        <a class="mobile-menu-brand" href="${ROOT}index.html"><span style="color:#e05050">N</span><span style="color:#5080e0">L</span><span style="color:#e08830">P</span>LAB</a>
         <button class="mobile-menu-close" id="mobile-menu-close" aria-label="메뉴 닫기">✕</button>
       </div>
       <div class="mobile-menu-body">
